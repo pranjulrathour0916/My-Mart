@@ -1,0 +1,83 @@
+import {
+  faBasketShopping,
+  faLocationDot,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import logo from "../../assets/logo.png";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+// import { ctrlNav } from "../../redux/showslice";
+// import { useDispatch, useSelector } from "react-redux";
+
+const Navbar = () => {
+  const userName = "SignIn";
+  const [city, setCity] = useState("");
+//   const [show, setShow] = useState(true)
+// const navType = useSelector((state)=> state.navdisp.value)
+// const dispatch = useDispatch()
+
+  useEffect(() => {
+    const fetchCity = async () => {
+      try {
+        const res = await fetch("https://ipapi.co/json/");
+        const data = await res.json();
+        if (data && data.city) {
+          setCity(data.city);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchCity();
+    
+  }, []);
+
+
+  return (
+    <nav className="bg-[#000000] top-0 left-0  fixed w-full text-white">
+      <div className="flex flex-row justify-evenly p-1  items-center">
+        <img
+          src={logo}
+          alt=""
+          className="w-auto  object-contain h-20 rounded-full "
+        />
+        <div className="flex flex-row items-center hover:outline hover:outline-2 p-3">
+          <FontAwesomeIcon className="mx-1" icon={faLocationDot} />
+          <div className="flex flex-col">
+            <p className="text-xs">Delivering to {city}</p>
+            <button>Update Location</button>
+          </div>
+        </div>
+        <div className="w-1/3 flex flex-row justify-end items-center  ">
+          <input
+            type="text"
+            name=""
+            id=""
+            className="w-full relative placeholder:text-center  text-black  rounded-lg p-1"
+            placeholder="Mobile"
+          />
+          <FontAwesomeIcon
+            className="absolute p-1 text-black"
+            icon={faSearch}
+          />
+        </div>
+        <div  className="hover:border-white hover:outline hover:outline-2 p-1">
+          <p className="text-sm">Hello </p>
+          <Link to="/login" className="text-base">
+            {userName}
+          </Link>
+        </div>
+        <div className=" hover:outline hover:outline-2 p-1">
+          <p>Orders</p>
+        </div>
+        <div className=" text-center p-1 ">
+          <FontAwesomeIcon className="text-xl" icon={faBasketShopping} />
+          <p className="text-sm">Cart 1</p>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
