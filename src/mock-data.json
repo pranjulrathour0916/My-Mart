@@ -1,0 +1,377 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "sku": "TSHIRT-001",
+      "name": "Organic Cotton T-Shirt",
+      "slug": "organic-cotton-tshirt",
+      "description": "Soft organic cotton t-shirt. Regular fit. Machine washable.",
+      "price": 24.99,
+      "currency": "USD",
+      "salePrice": 19.99,
+      "inStock": 120,
+      "categoryId": 1,
+      "tags": ["clothing", "eco", "basic"],
+      "rating": 4.6,
+      "reviewsCount": 34,
+      "colors": ["white", "black", "navy"],
+      "sizes": ["S", "M", "L", "XL"],
+      "images": [
+        "https://source.unsplash.com/800x800/?tshirt+front",
+        "https://source.unsplash.com/800x800/?tshirt+back",
+        "https://source.unsplash.com/800x800/?tshirt+detail"
+      ],
+      "createdAt": "2025-08-12T09:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "sku": "SNEAKER-010",
+      "name": "Everyday Running Sneaker",
+      "slug": "everyday-running-sneaker",
+      "description": "Lightweight running shoe with breathable mesh and cushioned sole.",
+      "price": 89.99,
+      "currency": "USD",
+      "salePrice": null,
+      "inStock": 54,
+      "categoryId": 2,
+      "tags": ["shoes", "running"],
+      "rating": 4.3,
+      "reviewsCount": 89,
+      "colors": ["white", "grey"],
+      "sizes": ["7", "8", "9", "10", "11", "12"],
+      "images": [
+        "https://source.unsplash.com/800x800/?running+sneaker+side",
+        "https://source.unsplash.com/800x800/?running+sneaker+top"
+      ],
+      "createdAt": "2025-07-03T14:20:00.000Z"
+    },
+    {
+      "id": 3,
+      "sku": "MUG-004",
+      "name": "Ceramic Coffee Mug - 350ml",
+      "slug": "ceramic-coffee-mug-350ml",
+      "description": "Hand-finished ceramic mug, dishwasher safe, 350ml capacity.",
+      "price": 12.5,
+      "currency": "USD",
+      "salePrice": 9.99,
+      "inStock": 200,
+      "categoryId": 3,
+      "tags": ["home", "kitchen", "gifts"],
+      "rating": 4.8,
+      "reviewsCount": 150,
+      "colors": ["white", "matte-black"],
+      "sizes": [],
+      "images": [
+        "https://source.unsplash.com/800x800/?coffee+mug+white",
+        "https://source.unsplash.com/800x800/?coffee+mug+black"
+      ],
+      "createdAt": "2025-06-20T10:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "sku": "HEADPH-099",
+      "name": "Wireless Headphones Pro",
+      "slug": "wireless-headphones-pro",
+      "description": "Bluetooth 5.3, active noise cancellation, 30h battery life.",
+      "price": 149.0,
+      "currency": "USD",
+      "salePrice": 129.0,
+      "inStock": 30,
+      "categoryId": 4,
+      "tags": ["electronics", "audio"],
+      "rating": 4.4,
+      "reviewsCount": 210,
+      "colors": ["black", "silver"],
+      "sizes": [],
+      "images": [
+        "https://source.unsplash.com/800x800/?wireless+headphones+black",
+        "https://source.unsplash.com/800x800/?wireless+headphones+silver",
+        "https://source.unsplash.com/800x800/?headphones+case"
+      ],
+      "createdAt": "2025-09-01T08:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "sku": "BAG-021",
+      "name": "Compact Travel Backpack",
+      "slug": "compact-travel-backpack",
+      "description": "20L backpack with laptop sleeve, water-resistant fabric.",
+      "price": 59.99,
+      "currency": "USD",
+      "salePrice": null,
+      "inStock": 77,
+      "categoryId": 5,
+      "tags": ["bags", "travel"],
+      "rating": 4.2,
+      "reviewsCount": 45,
+      "colors": ["olive", "black"],
+      "sizes": [],
+      "images": [
+        "https://source.unsplash.com/800x800/?travel+backpack+olive",
+        "https://source.unsplash.com/800x800/?backpack+open"
+      ],
+      "createdAt": "2025-05-18T11:30:00.000Z"
+    },
+    {
+      "id": 6,
+      "sku": "WATCH-012",
+      "name": "Minimalist Quartz Watch",
+      "slug": "minimalist-quartz-watch",
+      "description": "Thin case, leather band, Japanese quartz movement.",
+      "price": 129.0,
+      "currency": "USD",
+      "salePrice": 99.0,
+      "inStock": 15,
+      "categoryId": 6,
+      "tags": ["accessories", "gifts"],
+      "rating": 4.7,
+      "reviewsCount": 64,
+      "colors": ["brown", "black"],
+      "sizes": [],
+      "images": [
+        "https://source.unsplash.com/800x800/?minimalist+watch+brown",
+        "https://source.unsplash.com/800x800/?watch+black"
+      ],
+      "createdAt": "2025-04-05T12:00:00.000Z"
+    },
+    {
+      "id": 7,
+      "sku": "JACKET-300",
+      "name": "Lightweight Windbreaker",
+      "slug": "lightweight-windbreaker",
+      "description": "Packable windbreaker with water-resistant shell.",
+      "price": 69.5,
+      "currency": "USD",
+      "salePrice": 49.99,
+      "inStock": 28,
+      "categoryId": 1,
+      "tags": ["clothing", "outerwear"],
+      "rating": 4.1,
+      "reviewsCount": 22,
+      "colors": ["red", "black"],
+      "sizes": ["M", "L", "XL"],
+      "images": [
+        "https://source.unsplash.com/800x800/?windbreaker+red",
+        "https://source.unsplash.com/800x800/?windbreaker+black"
+      ],
+      "createdAt": "2025-03-01T09:00:00.000Z"
+    },
+    {
+      "id": 8,
+      "sku": "LAMP-011",
+      "name": "LED Desk Lamp",
+      "slug": "led-desk-lamp",
+      "description": "Adjustable brightness, touch controls, USB charging port.",
+      "price": 34.99,
+      "currency": "USD",
+      "salePrice": null,
+      "inStock": 98,
+      "categoryId": 3,
+      "tags": ["home", "office", "lighting"],
+      "rating": 4.5,
+      "reviewsCount": 74,
+      "colors": ["white"],
+      "sizes": [],
+      "images": [
+        "https://source.unsplash.com/800x800/?desk+lamp+lit",
+        "https://source.unsplash.com/800x800/?desk+lamp+usb"
+      ],
+      "createdAt": "2025-02-14T16:00:00.000Z"
+    },
+    {
+      "id": 9,
+      "sku": "KEYBOARD-050",
+      "name": "Mechanical Keyboard - Blue Switches",
+      "slug": "mechanical-keyboard-blue-switches",
+      "description": "Full-size keyboard with tactile blue mechanical switches, RGB backlit.",
+      "price": 119.99,
+      "currency": "USD",
+      "salePrice": 99.99,
+      "inStock": 45,
+      "categoryId": 4,
+      "tags": ["electronics", "office", "gaming"],
+      "rating": 4.6,
+      "reviewsCount": 112,
+      "colors": ["black"],
+      "sizes": [],
+      "images": [
+        "https://source.unsplash.com/800x800/?mechanical+keyboard+top",
+        "https://source.unsplash.com/800x800/?keyboard+switches"
+      ],
+      "createdAt": "2025-10-05T13:00:00.000Z"
+    },
+    {
+      "id": 10,
+      "sku": "JEANS-005",
+      "name": "Slim Fit Denim Jeans",
+      "slug": "slim-fit-denim-jeans",
+      "description": "Classic five-pocket slim fit jeans. Stretch denim for comfort.",
+      "price": 69.99,
+      "currency": "USD",
+      "salePrice": null,
+      "inStock": 70,
+      "categoryId": 1,
+      "tags": ["clothing", "denim"],
+      "rating": 4.5,
+      "reviewsCount": 90,
+      "colors": ["dark-wash", "light-wash"],
+      "sizes": ["30x30", "32x32", "34x32", "36x34"],
+      "images": [
+        "https://source.unsplash.com/800x800/?jeans+darkwash",
+        "https://source.unsplash.com/800x800/?jeans+lightwash"
+      ],
+      "createdAt": "2025-11-01T15:00:00.000Z"
+    }
+  ],
+  "categories": [
+    { "id": 1, "name": "Clothing", "slug": "clothing" },
+    { "id": 2, "name": "Shoes", "slug": "shoes" },
+    { "id": 3, "name": "Home & Kitchen", "slug": "home-kitchen" },
+    { "id": 4, "name": "Electronics", "slug": "electronics" },
+    { "id": 5, "name": "Bags & Travel", "slug": "bags-travel" },
+    { "id": 6, "name": "Accessories", "slug": "accessories" }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Asha Patel",
+      "email": "asha@example.com",
+      "address": {
+        "line1": "12 MG Road",
+        "city": "Mumbai",
+        "state": "MH",
+        "zip": "400001",
+        "country": "IN"
+      },
+      "createdAt": "2025-01-02T09:30:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Rahul Singh",
+      "email": "rahul@example.com",
+      "address": {
+        "line1": "45 Brigade Rd",
+        "city": "Bengaluru",
+        "state": "KA",
+        "zip": "560001",
+        "country": "IN"
+      },
+      "createdAt": "2025-05-10T10:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Priya Sharma",
+      "email": "priya@example.com",
+      "address": {
+        "line1": "3rd Street, Sector 15",
+        "city": "Delhi",
+        "state": "DL",
+        "zip": "110001",
+        "country": "IN"
+      },
+      "createdAt": "2025-07-20T11:00:00.000Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "productId": 1,
+      "userId": 2,
+      "rating": 5,
+      "title": "Love it",
+      "body": "Very comfortable and good quality fabric.",
+      "createdAt": "2025-08-15T11:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "productId": 4,
+      "userId": 1,
+      "rating": 4,
+      "title": "Great noise cancellation",
+      "body": "Solid headphones for the price.",
+      "createdAt": "2025-09-10T09:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "productId": 3,
+      "userId": 3,
+      "rating": 5,
+      "title": "Perfect Mug",
+      "body": "Exactly what I needed for my morning coffee. Highly recommend the matte-black.",
+      "createdAt": "2025-10-01T15:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "productId": 9,
+      "userId": 2,
+      "rating": 4,
+      "title": "Solid build",
+      "body": "A bit loud, but excellent for gaming and typing.",
+      "createdAt": "2025-11-20T10:00:00.000Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": 101,
+      "userId": 1,
+      "items": [
+        { "productId": 3, "quantity": 2, "price": 9.99 },
+        { "productId": 1, "quantity": 1, "price": 19.99 }
+      ],
+      "subtotal": 39.97,
+      "shipping": 4.5,
+      "tax": 3.6,
+      "total": 48.07,
+      "status": "delivered",
+      "createdAt": "2025-10-20T08:30:00.000Z"
+    },
+    {
+      "id": 102,
+      "userId": 2,
+      "items": [
+        { "productId": 4, "quantity": 1, "price": 129.00 },
+        { "productId": 5, "quantity": 1, "price": 59.99 }
+      ],
+      "subtotal": 188.99,
+      "shipping": 0.0,
+      "tax": 15.12,
+      "total": 204.11,
+      "status": "shipped",
+      "createdAt": "2025-11-05T14:45:00.000Z"
+    },
+    {
+      "id": 103,
+      "userId": 3,
+      "items": [
+        { "productId": 6, "quantity": 1, "price": 99.00 },
+        { "productId": 7, "quantity": 1, "price": 49.99 }
+      ],
+      "subtotal": 148.99,
+      "shipping": 7.50,
+      "tax": 13.41,
+      "total": 169.90,
+      "status": "processing",
+      "createdAt": "2025-11-28T16:00:00.000Z"
+    }
+  ],
+  "carts": [
+    {
+      "id": "cart_abc123",
+      "userId": 2,
+      "items": [
+        { "productId": 2, "quantity": 1 },
+        { "productId": 6, "quantity": 1 }
+      ],
+      "updatedAt": "2025-11-02T12:00:00.000Z"
+    },
+    {
+      "id": "cart_xyz789",
+      "userId": 1,
+      "items": [
+        { "productId": 10, "quantity": 1 },
+        { "productId": 8, "quantity": 2 }
+      ],
+      "updatedAt": "2025-12-05T09:15:00.000Z"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import Login from './components/forms/Login';
 import SignUp from './components/forms/SignUp';
 import Categories from './components/layouts/Categories';
 import Home from './components/layouts/Home';
+import Proddetail from './components/layouts/Proddetail';
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
 
   const hideNavbar = hideNavbarRoutes.includes(location.pathname)
   return (
-    <div className='bg-[#222222] min-h-screen font-mono' >
+    <div className='bg-[#FFF8DE] min-h-screen font-serif tracking-wide' >
    <div>
     {!hideNavbar && <Navbar/>}
     <div className=''>
@@ -24,6 +25,7 @@ function App() {
       <Route path='/' element={<Home/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/signUp' element={<SignUp/>}/>
+      <Route path='/prodetail' element={<Proddetail/>}/>
     </Routes>
 </div>
    </div>

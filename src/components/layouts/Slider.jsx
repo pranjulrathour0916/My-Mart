@@ -28,6 +28,7 @@ const Slider = () => {
 
   return (
     <div className="mt-10 mx-5 rounded-lg bg-white">
+        <p className="text-xl font-bold mx-5 py-2">More Items to Consider</p>
       <div className="products relative snap-x snap-mandatory ">
         <ul ref={slideRef}  className="flex flex-row overflow-x-auto gap-32">
           {products.map((item) => (

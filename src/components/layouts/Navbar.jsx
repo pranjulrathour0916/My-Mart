@@ -5,10 +5,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from "../../assets/logo.png";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-// import { ctrlNav } from "../../redux/showslice";
-// import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = () => {
   const userName = "SignIn";
@@ -17,21 +15,21 @@ const Navbar = () => {
 // const navType = useSelector((state)=> state.navdisp.value)
 // const dispatch = useDispatch()
 
-  useEffect(() => {
-    const fetchCity = async () => {
-      try {
-        const res = await fetch("https://ipapi.co/json/");
-        const data = await res.json();
-        if (data && data.city) {
-          setCity(data.city);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchCity();
+  // useEffect(() => {
+  //   const fetchCity = async () => {
+  //     try {
+  //       const res = await fetch("https://ipapi.co/json/");
+  //       const data = await res.json();
+  //       if (data && data.city) {
+  //         setCity(data.city);
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  //   fetchCity();
     
-  }, []);
+  // }, []);
 
 
   return (
