@@ -24,22 +24,22 @@ const Products = () => {
 
 
   return (
-    <div className="grid grid-cols-4 gap-4 mx-8">
-      {chunkedItems.map((chunk, chunkIndex) => (
-        <div key={chunkIndex} className=" border bg-slate-100 ">
-          <div className="">
-            <p className="text-black text-lg text-center font-semibold mt-1">
+    <div className="grid grid-cols-4 rounded-xl  perspective-1000  gap-4 mx-5">
+            <p className="text-white text-lg text-center flex items-center justify-center font-semibold mt-1 p-1">
               Fashion Your Style
             </p>
-            <ul className="grid grid-cols-2 gap-4 p-2">
+      {chunkedItems.map((chunk, chunkIndex) => (
+        <div key={chunkIndex} className="  shadow-[0_0px_20px_rgba(0,0,0,0.5)]  rounded-lg ">
+          <div className="">
+            <ul className="grid  grid-cols-2 perspective-1000 gap-4 p-4">
               {chunk.map((item) => (
                 <li
                   key={item.id}
                   onClick={() => handleClick(item.title)}
-                  className="text-white p-2 rounded-xl bg-white hover:shadow-lg hover:sc"
+                  className="text-white  p-2 transform-style-preserve-3d  rounded-xl   shadow-[0_0px_20px_rgba(0,0,0,0.5)] hover:scale-105 "
                 >
-                  <img src={item.img} alt="" className="w-60 h-28" />
-                  <p className="text-center text-black text-xs font-semibold mt-4">
+                  <img src={item.img} alt="" className="w-60 h-28 rounded-lg image-3d-tilt  " />
+                  <p className="text-center text-white text-xs font-semibold mt-4">
                     {item.title}
                   </p>
                 </li>

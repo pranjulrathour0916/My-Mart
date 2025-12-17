@@ -1,3 +1,5 @@
+
+
 {
   "products": [
     {
@@ -16,7 +18,7 @@
       "reviewsCount": 34,
       "colors": ["white", "black", "navy"],
       "sizes": ["S", "M", "L", "XL"],
-      "images": [
+      "img": [
         "https://source.unsplash.com/800x800/?tshirt+front",
         "https://source.unsplash.com/800x800/?tshirt+back",
         "https://source.unsplash.com/800x800/?tshirt+detail"
@@ -39,7 +41,7 @@
       "reviewsCount": 89,
       "colors": ["white", "grey"],
       "sizes": ["7", "8", "9", "10", "11", "12"],
-      "images": [
+      "img": [
         "https://source.unsplash.com/800x800/?running+sneaker+side",
         "https://source.unsplash.com/800x800/?running+sneaker+top"
       ],
@@ -61,7 +63,7 @@
       "reviewsCount": 150,
       "colors": ["white", "matte-black"],
       "sizes": [],
-      "images": [
+      "img": [
         "https://source.unsplash.com/800x800/?coffee+mug+white",
         "https://source.unsplash.com/800x800/?coffee+mug+black"
       ],
@@ -83,7 +85,7 @@
       "reviewsCount": 210,
       "colors": ["black", "silver"],
       "sizes": [],
-      "images": [
+      "img": [
         "https://source.unsplash.com/800x800/?wireless+headphones+black",
         "https://source.unsplash.com/800x800/?wireless+headphones+silver",
         "https://source.unsplash.com/800x800/?headphones+case"
@@ -106,7 +108,7 @@
       "reviewsCount": 45,
       "colors": ["olive", "black"],
       "sizes": [],
-      "images": [
+      "img": [
         "https://source.unsplash.com/800x800/?travel+backpack+olive",
         "https://source.unsplash.com/800x800/?backpack+open"
       ],
@@ -128,7 +130,7 @@
       "reviewsCount": 64,
       "colors": ["brown", "black"],
       "sizes": [],
-      "images": [
+      "img": [
         "https://source.unsplash.com/800x800/?minimalist+watch+brown",
         "https://source.unsplash.com/800x800/?watch+black"
       ],
@@ -150,7 +152,7 @@
       "reviewsCount": 22,
       "colors": ["red", "black"],
       "sizes": ["M", "L", "XL"],
-      "images": [
+      "img": [
         "https://source.unsplash.com/800x800/?windbreaker+red",
         "https://source.unsplash.com/800x800/?windbreaker+black"
       ],
@@ -172,7 +174,7 @@
       "reviewsCount": 74,
       "colors": ["white"],
       "sizes": [],
-      "images": [
+      "img": [
         "https://source.unsplash.com/800x800/?desk+lamp+lit",
         "https://source.unsplash.com/800x800/?desk+lamp+usb"
       ],
@@ -194,7 +196,7 @@
       "reviewsCount": 112,
       "colors": ["black"],
       "sizes": [],
-      "images": [
+      "img": [
         "https://source.unsplash.com/800x800/?mechanical+keyboard+top",
         "https://source.unsplash.com/800x800/?keyboard+switches"
       ],
@@ -216,7 +218,7 @@
       "reviewsCount": 90,
       "colors": ["dark-wash", "light-wash"],
       "sizes": ["30x30", "32x32", "34x32", "36x34"],
-      "images": [
+      "img": [
         "https://source.unsplash.com/800x800/?jeans+darkwash",
         "https://source.unsplash.com/800x800/?jeans+lightwash"
       ],

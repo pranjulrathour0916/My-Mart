@@ -7,6 +7,8 @@ import SignUp from './components/forms/SignUp';
 import Categories from './components/layouts/Categories';
 import Home from './components/layouts/Home';
 import Proddetail from './components/layouts/Proddetail';
+import SelectProd from './components/layouts/SelectProd';
+// import Snowfall from 'react-snowfall';
 
 
 function App() {
@@ -15,7 +17,8 @@ function App() {
 
   const hideNavbar = hideNavbarRoutes.includes(location.pathname)
   return (
-    <div className='bg-[#FFF8DE] min-h-screen font-serif tracking-wide' >
+    <div className='bg-black min-h-screen font-serif tracking-wider' >
+      {/* <Snowfall/> */}
    <div>
     {!hideNavbar && <Navbar/>}
     <div className=''>
@@ -26,6 +29,7 @@ function App() {
       <Route path='/login' element={<Login/>}/>
       <Route path='/signUp' element={<SignUp/>}/>
       <Route path='/prodetail' element={<Proddetail/>}/>
+      <Route path='/selectprod' element={<SelectProd/>}/>
     </Routes>
 </div>
    </div>

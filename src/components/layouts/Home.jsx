@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <>
       <div
-        className="border  flex justify-center items-center mt-5 shadow-md shadow-white border-slate-100 h-52 mx-11 rounded-3xl bg-white"
+        className=" text-white   flex justify-center items-center mt-5 shadow-lg shadow-white border-slate-100 h-52 mx-11 rounded-3xl bg-transparent"
         style={{ perspective: 3000 }}
       >
         <AnimatePresence mode="wait">
