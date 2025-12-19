@@ -8,6 +8,7 @@ import Categories from './components/layouts/Categories';
 import Home from './components/layouts/Home';
 import Proddetail from './components/layouts/Proddetail';
 import SelectProd from './components/layouts/SelectProd';
+import Cart from '../src/components/layouts/resuable/Cart'
 // import Snowfall from 'react-snowfall';
 
 
@@ -30,6 +31,7 @@ function App() {
       <Route path='/signUp' element={<SignUp/>}/>
       <Route path='/prodetail' element={<Proddetail/>}/>
       <Route path='/selectprod' element={<SelectProd/>}/>
+      <Route path='/cart' element={<Cart/>}/>
     </Routes>
 </div>
    </div>

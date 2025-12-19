@@ -7,15 +7,33 @@ import {
   faShoppingCart,
   faStar,
   faTicketSimple,
+  faHeart
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 const SelectProd = () => {
   const [show, setShow] = useState(false);
+  const [fav, setfav] = useState(false)
+  const {state} = useLocation()
 
+  useEffect(()=>{
+  console.log("this state from select prod",state)
+  },[])
+  
   const handleShow = () => {
     setShow(true);
   };
+  const handleFav = () => {
+    setfav(!fav)
+  }
+  const navigate = useNavigate()
+  
+  const handleCart = () => {
+    navigate('/cart')
+  }
   return (
     <div className="bg-white mx-10 min-h-screen mt-1 flex flex-row gap-1">
       <div className="w-2/5 self-start">
@@ -49,23 +67,26 @@ const SelectProd = () => {
               alt=""
             />
           </div>
+          <div>
+            <FontAwesomeIcon onClick={handleFav} icon={faHeart} className={`absolute left-[530px] top-[150px] border p-2 rounded-full bg-white text-xl ${fav ? "text-red-500" : "text-slate-300" }`}/>
+          </div>
         </div>
         <div className="btn flex flex-row gap-2 text-white mt-2 justify-between ml-4 items-center ">
           <button className=" w-full bg-orange-400 font-semibold  p-4 ">
             <FontAwesomeIcon icon={faBoltLightning} className="text-lg" /> Buy
             Now
           </button>
-          <button className=" w-full bg-orange-500 font-semibold  p-4 ">
+          <button onClick={handleCart} className=" w-full bg-orange-500 font-semibold  p-4 ">
             <FontAwesomeIcon icon={faShoppingCart} className="text-lg" /> Add to
             Cart
           </button>
         </div>
       </div>
-      <div className="details w-3/5 mt-2 border mx-1 border-black">
+      <div className="details w-3/5 mt-2  mx-1 border-black">
         <div className="mx-2 p-2">
           <ul className="space-y-2">
             <li>
-              <p className="font-bold">Puma</p>
+              <p className="font-bold text-xl">Puma</p>
             </li>
             <li>
               Trending Stylish Casual Outdoor Sneakers Shoes For Men Sneakers
