@@ -11,24 +11,28 @@ import { useMemo, useReducer, useState } from "react";
 import Footer from "./Footer";
 
 const initialState = {
-  rating : null
-}
+  rating: null,
+
+};
 
 const filterReducer = (state, action) => {
   switch (action.type) {
     case "Rating":
       return { ...state, rating: action.payload };
-      case "clear":
-        return initialState
+    case "clear":
+      return initialState;
     default:
-      return state
+      return state;
   }
 };
+
 const Proddetail = () => {
   const { state } = useLocation();
 
   // TanStack Query
   const { data = [], isPending, error } = useProducts();
+  const maxPrice = 1000
+  const [max, setmax] = useState(maxPrice);
 
   const navigate = useNavigate();
 
@@ -38,10 +42,29 @@ const Proddetail = () => {
   const [fitpro, setFitprod] = useReducer(filterReducer, { rating: null });
 
 
+  // input value
+
+  // Rating Filter
   const filterproducts = useMemo(() => {
-    if (!fitpro.rating) return filtering;
-    return filtering.filter((item) => Math.floor(item.rating.rate) === fitpro.rating);
-  }, [filtering, fitpro.rating]);
+    return filtering.filter((item) => {
+
+    // Rating filter
+    if (fitpro.rating && Math.floor(item.rating.rate) !== fitpro.rating) {
+      console.log("price filter",item.price, max)
+      return false;
+    }
+
+    // Price filter
+    if (Number(item.price) > Number(max)) {
+      return false;
+    }
+    
+    return true;
+  });
+  }, [filtering, fitpro.rating, max]);
+
+  
+
   // USestate for dropdown
   const [openId, setOpenId] = useState();
 
@@ -60,7 +83,6 @@ const Proddetail = () => {
     });
   };
 
-
   return (
     <>
       <div className="flex flex-row gap-2 p-2">
@@ -68,7 +90,12 @@ const Proddetail = () => {
           <div className="flex flex-col p-2 gap-10">
             <div className="flex flex-row justify-between  w-full items-center">
               <p className="font-bold  text-lg">Filters</p>
-              <p onClick={()=>setFitprod({type: "clear"})} className="text-blue-700 text-sm font-semibold">Clear All</p>
+              <p
+                onClick={() => setFitprod({ type: "clear" })}
+                className="text-blue-700 text-sm font-semibold"
+              >
+                Clear All
+              </p>
             </div>
             <div className=" space-y-4">
               <p className=" text-sm">Categories</p>
@@ -88,25 +115,45 @@ const Proddetail = () => {
               </p>
               {openId === "brand" && <Dropdown id="brand" />}
               <p>Gender</p>
-              <p>Price</p>
+              <div className="space-y-1">
+                <p>Price</p>
+                <div className="slider flex flex-col   w-2/3">
+                  <input
+                    type="range"
+                    min={0}
+                    max={maxPrice}
+                    value={max}
+                    onChange={(e) => setmax(Number(e.target.value))}
+                    className="bg-blue-500 appearance-none rounded-lg h-1"
+                  />
+                  <div className="flex text-sm flex-row justify-between">
+                    <p>0</p>
+                    <p>{max}</p>
+                  </div>
+                </div>
+              </div>
               <div>
                 <p>Rating</p>
                 <ul className="">
                   <li className="flex items-center m-6 mt-2 gap-3">
                     <input
-                      onChange={() => setFitprod({type : "Rating", payload : 3})}
+                      onChange={() =>
+                        setFitprod({ type: "Rating", payload: 3 })
+                      }
                       type="radio"
                       name="rating"
-                      checked = {fitpro.rating === 3}
+                      checked={fitpro.rating === 3}
                       className="scale-150"
                     />
                     <span>3 Rating</span>
                   </li>
                   <li className="flex items-center m-6 mt-2 gap-3">
                     <input
-                     onChange={() => setFitprod({type : "Rating", payload : 4})}
+                      onChange={() =>
+                        setFitprod({ type: "Rating", payload: 4 })
+                      }
                       type="radio"
-                      checked = {fitpro.rating === 4}
+                      checked={fitpro.rating === 4}
                       name="rating"
                       className="scale-150"
                     />
