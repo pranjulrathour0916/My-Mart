@@ -15,10 +15,11 @@ import Cart from '../src/components/layouts/resuable/Cart'
 function App() {
   const hideNavbarRoutes = ['/login', '/signUp']
   const location = useLocation()
+ 
 
   const hideNavbar = hideNavbarRoutes.includes(location.pathname)
   return (
-    <div className='bg-black min-h-screen font-serif tracking-wider' >
+    <div className='bg-[#F8FAFC] min-h-screen font-semibold tracking-wider' >
       {/* <Snowfall/> */}
    <div>
     {!hideNavbar && <Navbar/>}

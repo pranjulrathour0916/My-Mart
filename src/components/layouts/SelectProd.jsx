@@ -10,18 +10,14 @@ import {
   faHeart
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useState } from "react";
+import {  useNavigate } from "react-router-dom";
 
 
 const SelectProd = () => {
   const [show, setShow] = useState(false);
   const [fav, setfav] = useState(false)
-  const {state} = useLocation()
-
-  useEffect(()=>{
-  console.log("this state from select prod",state)
-  },[])
+  
   
   const handleShow = () => {
     setShow(true);
@@ -35,40 +31,40 @@ const SelectProd = () => {
     navigate('/cart')
   }
   return (
-    <div className="bg-white mx-10 min-h-screen mt-1 flex flex-row gap-1">
+    <div className="mx-10 min-h-screen mt-1 flex flex-row gap-1">
       <div className="w-2/5 self-start">
         <div className="flex flex-row ">
-          <div className="bg-white w-2/12 h-2/3 p-2 flex flex-col gap-2 items-center justify-center">
+          <div className="  w-2/12 h-2/3 p-2 flex flex-col gap-2 items-center justify-center">
             <img
               src={shoes}
-              className="w-20 border border-black h-16 "
+              className="w-20 border bg-white border-black h-16 "
               alt=""
             />
             <img
               src={shoes}
-              className="w-20 border border-black h-16 "
+              className="w-20 border bg-white border-black h-16 "
               alt=""
             />
             <img
               src={shoes}
-              className="w-20 border border-black h-16 "
+              className="w-20 border bg-white border-black h-16 "
               alt=""
             />
             <img
               src={shoes}
-              className="w-20 border border-black h-16 "
+              className="w-20 border bg-white border-black h-16 "
               alt=""
             />
           </div>
-          <div className="mt-2 bg-slate-100 h-[450px] ">
+          <div className="mt-2 bg-white  perspective-[4000px] h-[450px] ">
             <img
               src={shoes}
-              className="h-auto rotate-45 mt-16 object-cover"
+              className="h-auto rotate-45 translate-z-10 translte-z-10 drop-shadow-xl mt-16 object-cover"
               alt=""
             />
           </div>
           <div>
-            <FontAwesomeIcon onClick={handleFav} icon={faHeart} className={`absolute left-[530px] top-[150px] border p-2 rounded-full bg-white text-xl ${fav ? "text-red-500" : "text-slate-300" }`}/>
+            <FontAwesomeIcon onClick={handleFav} icon={faHeart} className={`absolute left-[530px] top-[150px] border p-2 rounded-full bg-gray-200 text-xl ${fav ? "text-red-500" : "text-white" }`}/>
           </div>
         </div>
         <div className="btn flex flex-row gap-2 text-white mt-2 justify-between ml-4 items-center ">
@@ -92,7 +88,7 @@ const SelectProd = () => {
               Trending Stylish Casual Outdoor Sneakers Shoes For Men Sneakers
               For Men (White, Black , 8)
             </li>
-            <li className="text-green-500 text-sm">Special Price</li>
+            <li className="text-green-500 font-semibold text-sm">Special Price</li>
             <li>
               <FontAwesomeIcon icon={faIndianRupee} />
               328{" "}
@@ -186,10 +182,10 @@ const SelectProd = () => {
                   inputMode="numeric"
                   name=""
                   id=""
-                  placeholder="Enter Deivery Pincode"
+                  placeholder="Enter Delivery Pincode"
                   className=" outline-none focus:outline-none focus:ring-0  text-sm "
                 />
-                <button className="text-slate-400 text-sm ml-3">Check</button>
+                <button className="text-black font-bold text-sm ml-3">Check</button>
               </div>
             </li>
             <li className="pt-5">

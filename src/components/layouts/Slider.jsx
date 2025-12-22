@@ -4,11 +4,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useProducts } from "./query/productsQuery.ts";
+
 
 const Slider = () => {
-  const products = useSelector((state) => state.slideDisp);
+  const {data, isPending, error} = useProducts()
   const slideRef = useRef(null);
+  if(isPending)
+    return console.log("pendig")
+  if(error)
+    return console.log(error)
+
 
   const scrollLeft = () => {
     if (!slideRef.current) return;
@@ -27,15 +33,15 @@ const Slider = () => {
   };
 
   return (
-    <div className="mt-10 mx-5 rounded-lg bg-transparent ">
-        <p className="text-xl text-white  font-bold mx-5 py-2">More Items to Consider</p>
+    <div className="mt-10 mx-5 shadow-[0_0px_10px_rgba(0,0,0,0.5)] rounded-lg bg-transparent ">
+        <p className="text-xl   font-bold mx-5 py-2 uppercase">More Items to Consider</p>
       <div className="products relative snap-x snap-mandatory ">
         <ul ref={slideRef}  className="flex flex-row overflow-x-auto gap-32">
-          {products.map((item) => (
+          {data.map((item) => (
             <img
-              src={item.img}
+              src={item.image}
               key={item.id}
-              className="w-52 h-48 object-contain snap-start hover:scale-110"
+              className="w-full h-36 py-3 object-contain snap-start hover:scale-110"
               alt=""
             />
           ))}

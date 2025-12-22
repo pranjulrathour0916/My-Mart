@@ -5,12 +5,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from "../../assets/logo.png";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const userName = "SignIn";
-  const [city, setCity] = useState("");
 //   const [show, setShow] = useState(true)
 // const navType = useSelector((state)=> state.navdisp.value)
 // const dispatch = useDispatch()
@@ -43,7 +41,7 @@ const Navbar = () => {
         <div className="flex flex-row items-center hover:outline hover:outline-2 p-3">
           <FontAwesomeIcon className="mx-1" icon={faLocationDot} />
           <div className="flex flex-col">
-            <p className="text-xs">Delivering to {city}</p>
+            <p className="text-xs">Delivering to </p>
             <button>Update Location</button>
           </div>
         </div>

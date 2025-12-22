@@ -9,6 +9,8 @@ import SingleProd from "./SingleProd";
 import Footer from "./Footer";
 const Home = () => {
   const [index, setIndex] = useState(0);
+
+
   const slides = [
     { id: 1, title: "Smartphones", price: "6999", img: mobile, width: 90 },
     { id: 2, title: "Clothes", price: "699", img: clothes, width: 200 },
@@ -24,7 +26,7 @@ const Home = () => {
   return (
     <>
       <div
-        className=" text-white   flex justify-center items-center mt-5 shadow-lg shadow-white border-slate-100 h-52 mx-11 rounded-3xl bg-transparent"
+        className=" text-black   flex justify-center items-center mt-5 shadow-lg  border-slate-100 h-52 mx-11 rounded-3xl bg-transparent"
         style={{ perspective: 3000 }}
       >
         <AnimatePresence mode="wait">
