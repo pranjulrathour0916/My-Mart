@@ -11,13 +11,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import {  useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
+import { useProducts } from "./query/productsQuery.ts";
+
 
 
 const SelectProd = () => {
   const [show, setShow] = useState(false);
   const [fav, setfav] = useState(false)
-  
+  const {id} = useParams()
+
+  const {data = [], isPending, error} = useProducts()
+
+  const filteredProds = data.find((item)=> item.id === Number(id))
+  {console.log("filtered one",filteredProds)}
   
   const handleShow = () => {
     setShow(true);
@@ -30,36 +37,41 @@ const SelectProd = () => {
   const handleCart = () => {
     navigate('/cart')
   }
+  if(isPending)
+    return <p>Loading...</p>
+
+  if(error)
+    return <p>{error.message}</p>
   return (
     <div className="mx-10 min-h-screen mt-1 flex flex-row gap-1">
       <div className="w-2/5 self-start">
         <div className="flex flex-row ">
           <div className="  w-2/12 h-2/3 p-2 flex flex-col gap-2 items-center justify-center">
             <img
-              src={shoes}
-              className="w-20 border bg-white border-black h-16 "
+              src={filteredProds.image}
+              className="w-full p-1 object-contain border bg-white border-black h-16 "
               alt=""
             />
             <img
-              src={shoes}
-              className="w-20 border bg-white border-black h-16 "
+              src={filteredProds.image}
+              className="w-full p-1 object-contain border bg-white border-black h-16 "
               alt=""
             />
             <img
-              src={shoes}
-              className="w-20 border bg-white border-black h-16 "
+              src={filteredProds.image}
+              className="w-full object-contain p-1 border bg-white border-black h-16 "
               alt=""
             />
             <img
-              src={shoes}
-              className="w-20 border bg-white border-black h-16 "
+              src={filteredProds.image}
+              className="w-full object-contain p-1 border bg-white border-black h-16 "
               alt=""
             />
           </div>
-          <div className="mt-2 bg-white  perspective-[4000px] h-[450px] ">
+          <div className="mt-2  perspective-[4000px] h-[450px] ">
             <img
-              src={shoes}
-              className="h-auto rotate-45 translate-z-10 translte-z-10 drop-shadow-xl mt-16 object-cover"
+              src={filteredProds.image}
+              className="w-full h-80  mt-10 object-contain"
               alt=""
             />
           </div>
@@ -82,16 +94,15 @@ const SelectProd = () => {
         <div className="mx-2 p-2">
           <ul className="space-y-2">
             <li>
-              <p className="font-bold text-xl">Puma</p>
+              <p className="font-bold text-xl">{filteredProds.title}</p>
             </li>
-            <li>
-              Trending Stylish Casual Outdoor Sneakers Shoes For Men Sneakers
-              For Men (White, Black , 8)
+            <li className="font-medium">
+              {filteredProds.description}
             </li>
             <li className="text-green-500 font-semibold text-sm">Special Price</li>
             <li>
               <FontAwesomeIcon icon={faIndianRupee} />
-              328{" "}
+              {filteredProds.price}{" "}
               <span className="text-sm line-through">
                 <FontAwesomeIcon
                   className="line-through"
@@ -102,10 +113,13 @@ const SelectProd = () => {
               <span className="text-green-600 font-bold">67% off </span>
             </li>
             <li>
-              <span className="bg-green-600 text-white rounded-xl px-4 font-bold text-sm p-1">
-                3.9 <FontAwesomeIcon icon={faStar} className="text-xs" />
-              </span>
-              <span className="ml-3 text-slate-500 font-semibold">
+             <div className="flex flex-row items-center gap-2">
+               <p className="bg-green-600 text-white rounded-xl px-4 font-bold text-sm p-1">
+                {filteredProds.rating.rate}
+                <span className="ml-1"><FontAwesomeIcon icon={faStar} className="text-xs" /></span>
+              </p>
+             </div>
+              <span className="ml-3 mt-1 text-slate-500 font-semibold">
                 1,05,598 ratings and 2,939 reviews
               </span>
             </li>

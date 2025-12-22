@@ -27,9 +27,7 @@ const Products = () => {
 
   const handleClick = (title) => {
     console.log("this is title from product", title);
-    navigate("/prodetail", {
-      state: { title },
-    });
+    navigate(`/prodetail/${title}`);
   };
 
 

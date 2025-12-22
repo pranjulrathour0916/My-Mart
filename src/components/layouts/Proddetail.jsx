@@ -4,7 +4,7 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import { useProducts } from "./query/productsQuery.ts";
 import Dropdown from "./resuable/Dropdown";
 import { useMemo, useReducer, useState } from "react";
@@ -12,7 +12,7 @@ import Footer from "./Footer";
 
 const initialState = {
   rating: null,
-
+  price : 1000
 };
 
 const filterReducer = (state, action) => {
@@ -27,7 +27,7 @@ const filterReducer = (state, action) => {
 };
 
 const Proddetail = () => {
-  const { state } = useLocation();
+  const { category } = useParams();
 
   // TanStack Query
   const { data = [], isPending, error } = useProducts();
@@ -36,7 +36,7 @@ const Proddetail = () => {
 
   const navigate = useNavigate();
 
-  const filtering = data.filter((item) => item.category === state.category);
+  const filtering = data.filter((item) => item.category === category);
 
   //Reducer
   const [fitpro, setFitprod] = useReducer(filterReducer, { rating: null });
@@ -78,9 +78,7 @@ const Proddetail = () => {
 
   // Nvaigate to next page
   const handlClick = (id) => {
-    navigate("/selectprod", {
-      state: id,
-    });
+    navigate(`/selectprod/${id}`);
   };
 
   return (

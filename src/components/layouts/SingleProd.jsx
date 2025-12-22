@@ -14,9 +14,7 @@ const SingleProd = () => {
 
   const handleClick = (category) => {
     console.log("singleprod", category);
-    navigate("/prodetail", {
-      state: { category },
-    });
+    navigate(`/prodetail/${category}`);
   };
   return (
     <div>
