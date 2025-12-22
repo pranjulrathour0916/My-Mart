@@ -7,10 +7,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useProducts } from "./query/productsQuery.ts";
 import Dropdown from "./resuable/Dropdown";
-import { useState } from "react";
+import { useMemo, useReducer, useState } from "react";
 import Footer from "./Footer";
-import {  useSelector } from "react-redux";
 
+const initialState = {
+  rating : null
+}
+
+const filterReducer = (state, action) => {
+  switch (action.type) {
+    case "Rating":
+      return { ...state, rating: action.payload };
+      case "clear":
+        return initialState
+    default:
+      return state
+  }
+};
 const Proddetail = () => {
   const { state } = useLocation();
 
@@ -19,13 +32,18 @@ const Proddetail = () => {
 
   const navigate = useNavigate();
 
-  // Redux
-  const prods = useSelector((state)=> state.products.filterprods)
-  const filtering = data.filter((item) => item.category === state.category)
-  
+  const filtering = data.filter((item) => item.category === state.category);
+
+  //Reducer
+  const [fitpro, setFitprod] = useReducer(filterReducer, { rating: null });
+
+
+  const filterproducts = useMemo(() => {
+    if (!fitpro.rating) return filtering;
+    return filtering.filter((item) => Math.floor(item.rating.rate) === fitpro.rating);
+  }, [filtering, fitpro.rating]);
   // USestate for dropdown
   const [openId, setOpenId] = useState();
-
 
   // Part of Tanstack
   if (isPending) return <p>Loading..</p>;
@@ -42,9 +60,6 @@ const Proddetail = () => {
     });
   };
 
-  const handleRatingFilter = (selectedRating) => {
-
-  };
 
   return (
     <>
@@ -53,7 +68,7 @@ const Proddetail = () => {
           <div className="flex flex-col p-2 gap-10">
             <div className="flex flex-row justify-between  w-full items-center">
               <p className="font-bold  text-lg">Filters</p>
-              <p className="text-blue-700 text-sm font-semibold">Clear All</p>
+              <p onClick={()=>setFitprod({type: "clear"})} className="text-blue-700 text-sm font-semibold">Clear All</p>
             </div>
             <div className=" space-y-4">
               <p className=" text-sm">Categories</p>
@@ -79,16 +94,20 @@ const Proddetail = () => {
                 <ul className="">
                   <li className="flex items-center m-6 mt-2 gap-3">
                     <input
-                      onClick={() => handleRatingFilter(3)}
-                      type="checkbox"
+                      onChange={() => setFitprod({type : "Rating", payload : 3})}
+                      type="radio"
+                      name="rating"
+                      checked = {fitpro.rating === 3}
                       className="scale-150"
                     />
                     <span>3 Rating</span>
                   </li>
                   <li className="flex items-center m-6 mt-2 gap-3">
                     <input
-                      onClick={() => handleRatingFilter(3)}
-                      type="checkbox"
+                     onChange={() => setFitprod({type : "Rating", payload : 4})}
+                      type="radio"
+                      checked = {fitpro.rating === 4}
+                      name="rating"
                       className="scale-150"
                     />
                     <span>4 Rating</span>
@@ -101,7 +120,7 @@ const Proddetail = () => {
         <div className=" w-full min-h-screen p-2 space-y-4">
           <div className="perspective-[2000px]">
             <ul className="grid  grid-cols-4 bg-slate-100  gap-4 mx-5">
-              {filtering.map((item) => (
+              {filterproducts.map((item) => (
                 <li
                   onClick={() => handlClick(item.id)}
                   className="border shadow-[0_0px_20px_rgba(0,0,0,0.5)]  p-2 hover:shadow-xl flex flex-col text-black "
