@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import shoes from "../../assets/shoes.png";
 import {
   faBoltLightning,
   faIndianRupee,
@@ -11,20 +10,23 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import {  useState } from "react";
-import {  useNavigate, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { useProducts } from "./query/productsQuery.ts";
-
+import { addItem } from "../../redux/cartSlice.js";
+import { useDispatch } from "react-redux";
 
 
 const SelectProd = () => {
   const [show, setShow] = useState(false);
   const [fav, setfav] = useState(false)
   const {id} = useParams()
+  const dispatch = useDispatch()
+
 
   const {data = [], isPending, error} = useProducts()
 
   const filteredProds = data.find((item)=> item.id === Number(id))
-  {console.log("filtered one",filteredProds)}
+
   
   const handleShow = () => {
     setShow(true);
@@ -32,10 +34,11 @@ const SelectProd = () => {
   const handleFav = () => {
     setfav(!fav)
   }
-  const navigate = useNavigate()
+
   
-  const handleCart = () => {
-    navigate('/cart')
+  const handleCart = (filteredProds) => {
+    // navigate('/cart')
+    dispatch(addItem(filteredProds))
   }
   if(isPending)
     return <p>Loading...</p>
@@ -80,11 +83,11 @@ const SelectProd = () => {
           </div>
         </div>
         <div className="btn flex flex-row gap-2 text-white mt-2 justify-between ml-4 items-center ">
-          <button className=" w-full bg-orange-400 font-semibold  p-4 ">
+          <button className=" w-full bg-orange-500 font-semibold  p-4 ">
             <FontAwesomeIcon icon={faBoltLightning} className="text-lg" /> Buy
             Now
           </button>
-          <button onClick={handleCart} className=" w-full bg-orange-500 font-semibold  p-4 ">
+          <button onClick={()=>(handleCart(filteredProds))} className=" w-full bg-orange-500 font-semibold  p-4 ">
             <FontAwesomeIcon icon={faShoppingCart} className="text-lg" /> Add to
             Cart
           </button>

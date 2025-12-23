@@ -5,30 +5,38 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const Navbar = () => {
-  const userName = "SignIn";
 //   const [show, setShow] = useState(true)
 // const navType = useSelector((state)=> state.navdisp.value)
 // const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   const fetchCity = async () => {
-  //     try {
-  //       const res = await fetch("https://ipapi.co/json/");
-  //       const data = await res.json();
-  //       if (data && data.city) {
-  //         setCity(data.city);
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   fetchCity();
-    
-  // }, []);
+// useEffect(() => {
+//   const fetchCity = async () => {
+//     try {
+//       const res = await fetch("https://ipapi.co/json/");
+//       const data = await res.json();
+//       if (data && data.city) {
+//         setCity(data.city);
+//       }
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+//   fetchCity();
 
+// }, []);
+const Navbar = () => {
+  const navigate = useNavigate()
+  const cart = useSelector((state)=> state.cart)
+  const userName = "SignIn";
+
+  const cartCount = cart.reduce((sum, item)=> sum + item.quantity,0)
+
+  const openCart = () => {
+    navigate("/cart")
+  }
 
   return (
     <nav className="bg-[#000000] z-50 top-0 left-0 sticky w-full text-white">
@@ -58,7 +66,7 @@ const Navbar = () => {
             icon={faSearch}
           />
         </div>
-        <div  className="hover:border-white hover:outline hover:outline-2 p-1">
+        <div className="hover:border-white hover:outline hover:outline-2 p-1">
           <p className="text-sm">Hello </p>
           <Link to="/login" className="text-base">
             {userName}
@@ -67,9 +75,9 @@ const Navbar = () => {
         <div className=" hover:outline hover:outline-2 p-1">
           <p>Orders</p>
         </div>
-        <div className=" text-center p-1 ">
+        <div onClick={openCart} className=" text-center p-1 ">
           <FontAwesomeIcon className="text-xl" icon={faBasketShopping} />
-          <p className="text-sm">Cart 1</p>
+          <p className="text-sm">Cart {cartCount}</p>
         </div>
       </div>
     </nav>

@@ -7,9 +7,11 @@ import Products from "./Products";
 import Slider from "./Slider";
 import SingleProd from "./SingleProd";
 import Footer from "./Footer";
+
 const Home = () => {
   const [index, setIndex] = useState(0);
-
+ 
+ 
 
   const slides = [
     { id: 1, title: "Smartphones", price: "6999", img: mobile, width: 90 },
@@ -20,6 +22,7 @@ const Home = () => {
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % slides.length);
     }, 4000);
+  
     return () => clearInterval(id);
   });
   const current = slides[index];
