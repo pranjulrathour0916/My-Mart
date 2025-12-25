@@ -9,6 +9,8 @@ import Home from './components/layouts/Home';
 import Proddetail from './components/layouts/Proddetail';
 import SelectProd from './components/layouts/SelectProd';
 import Cart from '../src/components/layouts/resuable/Cart'
+import Multiprodimg from './components/layouts/resuable/Multiprodimg';
+
 // import Snowfall from 'react-snowfall';
 
 
@@ -33,6 +35,7 @@ function App() {
       <Route path='/prodetail/:category' element={<Proddetail/>}/>
       <Route path='/selectprod/:id' element={<SelectProd/>}/>
       <Route path='/cart' element={<Cart/>}/>
+      <Route path='/multi' element={<Multiprodimg/>}/>
     </Routes>
 </div>
    </div>

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIndianRupee, faPlus, faSubtract } from '@fortawesome/free-solid-svg-icons'
-import { useSelector } from 'react-redux'
-
+import { useDispatch, useSelector } from 'react-redux'
+import {addItem, removeItem } from '../../../redux/cartSlice'
 
 
 
@@ -9,6 +9,11 @@ const Cart = () => {
   const carItems = useSelector((state)=> state.cart)
   const count = carItems.reduce((sum, item)=>  sum + item.quantity,0)
   const totalPrice = carItems.reduce((sum, item)=> sum + item.quantity * item.price,0)
+  const discount = 40;
+  const platformfee = 7
+  const coupoun = 4 
+  const totalamount = totalPrice - discount - coupoun + platformfee 
+  const dispatch = useDispatch()
   
   return (
     <div>
@@ -39,9 +44,9 @@ const Cart = () => {
        </div>
        <div className='flex gap-10'>
         <div className='flex gap-4'>
-          <FontAwesomeIcon className='border p-1 rounded-full' icon={faSubtract}/>
+          <FontAwesomeIcon className='border p-1 rounded-full' onClick={()=> dispatch(removeItem(item))} icon={faSubtract}/>
           <span className='border px-6'>{item.quantity}</span>
-          <FontAwesomeIcon className='border p-1 text-sm rounded-full' icon={faPlus}/>
+          <FontAwesomeIcon className='border p-1 text-sm rounded-full' onClick={()=>dispatch(addItem(item))} icon={faPlus}/>
         </div>
         <span>SAVE FOR LATER</span>
         <span>REMOVE</span>
@@ -62,16 +67,32 @@ const Cart = () => {
           <p className='text-gray-700'>PRICE DETAILS</p>
         </div>
         <div >
-          <ul>
-            <li className='flex justify-around'>Price  
-              <span> {count}</span>
-              <span><FontAwesomeIcon icon={faIndianRupee}/>{Math.floor(totalPrice)}</span>
+          <ul className='font-normal flex  flex-col gap-5'>
+            <li className='flex justify-between  '>
+             <div className='flex gap-5'>
+               <span>Price</span>  
+              <span> ({count} items)</span>
+             </div>
+              <p><FontAwesomeIcon icon={faIndianRupee}/>{Math.floor(totalPrice)}</p>
             </li>
+           <li className='flex justify-between'>
+            <span>Discount</span>
+            <span className='text-green-600'><FontAwesomeIcon className='text-sm' icon={faIndianRupee}/>-{discount}</span>
+           </li>
+           <li className='flex justify-between'>
+            <span>Coupouns for you</span>
+            <span className='text-green-600'><FontAwesomeIcon className='text-sm' icon={faIndianRupee}/>-{coupoun}</span>
+           </li>
+           <li className='flex justify-between'>
+            <span>Platform Fee</span>
+            <span><FontAwesomeIcon className='text-sm' icon={faIndianRupee}/>{platformfee}</span>
+           </li>
            
           </ul>
         </div>
-        <div>
-          Total Amount
+        <div className='flex justify-between mt-3 border-t-2 py-2'>
+          <span>Total Amount</span>
+          <span>{Math.floor(totalamount)}</span>
         </div>
         </div>
       </div>

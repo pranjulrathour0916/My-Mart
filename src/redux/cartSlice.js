@@ -19,11 +19,23 @@ export const cartSlice = createSlice({
       }
     },
 
+    removeItem : (state, action) => {
+        const prod = action.payload
+        const searchItem = state.find((item) => item.id === prod.id)
+        if(searchItem.quantity === 1)
+        {
+         const index =   state.findIndex((item)=> item.id === prod.id)
+            state.splice(index,1)
+        }
+        if(searchItem.quantity > 1)
+            searchItem.quantity -= 1;
+    }
+
 
    
   },
 });
 
-export const { addItem } = cartSlice.actions;
+export const { addItem, removeItem } = cartSlice.actions;
 
 export default cartSlice.reducer;
