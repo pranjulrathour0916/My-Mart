@@ -8,6 +8,7 @@ import logo from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+
 //   const [show, setShow] = useState(true)
 // const navType = useSelector((state)=> state.navdisp.value)
 // const dispatch = useDispatch()
@@ -31,8 +32,11 @@ const Navbar = () => {
   const navigate = useNavigate()
   const cart = useSelector((state)=> state.cart)
   const userName = "SignIn";
+ 
 
   const cartCount = cart.reduce((sum, item)=> sum + item.quantity,0)
+
+  
 
   const openCart = () => {
     navigate("/cart")
