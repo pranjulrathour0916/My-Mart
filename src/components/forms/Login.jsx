@@ -1,17 +1,80 @@
 import { easeInOut, motion } from "framer-motion";
 import { useState } from "react";
+import { useUserlogin, useUserSign } from "../layouts/query/authentication.ts";
+import { loginSchema, signUPSchema } from "../validators/authScehma.ts";
 
 const Login = () => {
+  const initialForm = {
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+  };
+  const loginInitialForm = {
+    phone: "",
+    password: "",
+  };
   const [flip, setFlip] = useState(true);
+  const [formData, setFormData] = useState(initialForm);
+  const [loginformData, setLoginFormData] = useState(loginInitialForm);
+  const [errors, setErrors] = useState();
 
+  const { mutate } = useUserSign();
+
+  const {mutate : login} = useUserlogin()
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setErrors(null)
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    setLoginFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSumbit = () => {
+    console.log(formData);
+    const result = signUPSchema.safeParse(formData);
+    if (!result.success) {
+     const messages = result.error.issues.map(issue => issue.message);
+  console.log(messages);
+  setErrors(messages)
+      return;
+    }
+
+    mutate(formData);
+  };
+  const handleLoginSumbit =  () => {
+    console.log(loginformData)
+    const result = loginSchema.safeParse(loginformData);
+    if (!result.success) {
+     const messages = result.error.issues.map(issue => issue.message);
+  console.log(messages);
+  setErrors(messages)
+      return;
+    }
+   login(loginformData,
+    {
+      onSuccess:(data)=>{
+        console.log("this is response",data)
+      }
+    }
+   );
+
+  };
   const handleFlip = () => {
     setFlip((prev) => !prev);
+    setFormData(initialForm);
   };
   return (
     <div className="">
       <div className="outer [perspective:1000px] relative">
         <motion.div
-          animate={{rotateY:flip ? 0 :180}}
+          animate={{ rotateY: flip ? 0 : 180 }}
           transition={{ duration: 1, ease: easeInOut }}
           className="inner absolute inset-0 [transform-style:preserve-3d]"
         >
@@ -22,56 +85,68 @@ const Login = () => {
             >
               <div className="flex flex-col gap-2 border w-1/3 break-all bg-black rounded-xl shadow-lg shadow-zinc-300 p-9 text-2xl">
                 <div className="flex flex-row items-center gap-2 ">
-                  <div className="flex flex-col gap-2 w-1/2">
-                    <label>Firstname</label>
+                  <div className="flex flex-col gap-2 w-full">
+                    <label className="tracking-widest">Fullname</label>
                     <input
-                      className="rounded-xl"
+                      className="rounded text-black px-2"
                       type="text"
-                      name="firstname"
+                      name="name"
                       id="firstname"
-                      
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2 w-1/2">
-                    <label>Lastname</label>
-                    <input
-                      className="rounded-xl"
-                      type="text"
-                      name="lastname"
-                      id="lastname"
+                      value={formData.name}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
                 <label>Email</label>
                 <input
-                  className="rounded-xl"
+                  className="rounded text-black px-2"
                   type="email"
                   name="email"
                   id="email"
+                  value={formData.email}
+                  onChange={handleChange}
                 />
                 <label>Phone Number</label>
                 <input
-                  className="rounded-xl"
+                  className="rounded text-black px-2"
                   type="tel"
                   name="phone"
                   id="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
                 />
-                  <label >Password</label>
-                 <input
-                  className="rounded-xl"
+                <label>Password</label>
+                <input
+                  className="rounded text-black px-2"
                   type="password"
                   name="password"
                   id="password"
+                  value={formData.password}
+                  onChange={handleChange}
                 />
                 <button
                   className="bg-gray-200 mt-2 rounded-xl p-1 font-semibold text-black"
+                  type="button"
+                  onClick={handleSumbit}
                 >
                   SignUp
                 </button>
                 <p className="text-base text-center mt-2">
                   Already have an Account?{" "}
-                  <span onClick={handleFlip} className="text-green-300 underline">SignIn</span>
+                  <span
+                    onClick={handleFlip}
+                    className="text-green-300 underline"
+                  >
+                    SignIn
+                  </span>
                 </p>
+                {errors && errors.map((item => 
+                  (
+                  <li style={{ color: "red", fontSize: "12px" }}>
+                    {item}
+                  </li>
+                )
+                ))}
               </div>
             </form>
           </div>
@@ -81,33 +156,49 @@ const Login = () => {
               action=""
             >
               <div className="flex flex-col gap-2 border w-1/3 break-all bg-black rounded-xl shadow-lg shadow-zinc-300 p-9 text-2xl">
-               
                 <label>Phone Number</label>
                 <input
-                  className="rounded-xl"
+                  className="rounded-xl text-black px-2"
                   type="tel"
                   name="phone"
                   id="phone"
+                  onChange={handleChange}
+                  value={loginformData.phone}
                 />
-                <label >Password</label>
-                 <input
-                  className="rounded-xl"
+                <label>Password</label>
+                <input
+                  className="rounded-xl text-black px-2"
                   type="password"
                   name="password"
                   id="password"
+                  onChange={handleChange}
+                  value={loginformData.password}
                 />
                 <button
                   className="bg-gray-200 mt-2 rounded-xl p-1 font-semibold text-black"
+                  type="button"
+                  onClick={handleLoginSumbit}
                 >
                   SignIn
                 </button>
                 <p className="text-base text-center mt-2">
                   Don't have an Account?{" "}
-                  <span onClick={handleFlip} className="text-green-300 underline">SignUp</span>
+                  <span
+                    onClick={handleFlip}
+                    className="text-green-300 underline"
+                  >
+                    SignUp
+                  </span>
                 </p>
+                {errors && errors.map((item => 
+                  (
+                  <li style={{ color: "red", fontSize: "12px" }}>
+                    {item}
+                  </li>
+                )
+                ))}
               </div>
             </form>
-
           </div>
         </motion.div>
       </div>
