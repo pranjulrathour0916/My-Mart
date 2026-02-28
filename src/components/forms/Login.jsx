@@ -2,7 +2,9 @@ import { easeInOut, motion } from "framer-motion";
 import { useState } from "react";
 import { useUserlogin, useUserSign } from "../layouts/query/authentication.ts";
 import { loginSchema, signUPSchema } from "../validators/authScehma.ts";
+import toast, { Toaster } from 'react-hot-toast';
 
+//SignUp for structure
 const Login = () => {
   const initialForm = {
     name: "",
@@ -10,26 +12,34 @@ const Login = () => {
     phone: "",
     password: "",
   };
+
+  //Login form Structure
   const loginInitialForm = {
     phone: "",
     password: "",
   };
+
   const [flip, setFlip] = useState(true);
   const [formData, setFormData] = useState(initialForm);
   const [loginformData, setLoginFormData] = useState(loginInitialForm);
   const [errors, setErrors] = useState();
+  const notify = (msg) => toast.success(msg);
 
+  //Importing React query for SignUP fucntion
   const { mutate } = useUserSign();
 
-  const {mutate : login} = useUserlogin()
+  //Importing React query for login fucntion
+  const { mutate: login } = useUserlogin();
 
+  //Handling SignUp input data
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setErrors(null)
+    setErrors(null);
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+    //Handling Login input data
     setLoginFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -40,31 +50,29 @@ const Login = () => {
     console.log(formData);
     const result = signUPSchema.safeParse(formData);
     if (!result.success) {
-     const messages = result.error.issues.map(issue => issue.message);
-  console.log(messages);
-  setErrors(messages)
+      const messages = result.error.issues.map((issue) => issue.message);
+      console.log(messages);
+      setErrors(messages);
       return;
     }
 
     mutate(formData);
   };
-  const handleLoginSumbit =  () => {
-    console.log(loginformData)
+  const handleLoginSumbit = () => {
+    console.log(loginformData);
     const result = loginSchema.safeParse(loginformData);
     if (!result.success) {
-     const messages = result.error.issues.map(issue => issue.message);
-  console.log(messages);
-  setErrors(messages)
+      const messages = result.error.issues.map((issue) => issue.message);
+      console.log(messages);
+      setErrors(messages);
       return;
     }
-   login(loginformData,
-    {
-      onSuccess:(data)=>{
-        console.log("this is response",data)
-      }
-    }
-   );
-
+    login(loginformData, {
+      onSuccess: (data) => {
+        notify(data.message)
+        console.log("this is response", data);
+      },
+    });
   };
   const handleFlip = () => {
     setFlip((prev) => !prev);
@@ -72,6 +80,7 @@ const Login = () => {
   };
   return (
     <div className="">
+        <Toaster/>
       <div className="outer [perspective:1000px] relative">
         <motion.div
           animate={{ rotateY: flip ? 0 : 180 }}
@@ -140,13 +149,10 @@ const Login = () => {
                     SignIn
                   </span>
                 </p>
-                {errors && errors.map((item => 
-                  (
-                  <li style={{ color: "red", fontSize: "12px" }}>
-                    {item}
-                  </li>
-                )
-                ))}
+                {errors &&
+                  errors.map((item) => (
+                    <li style={{ color: "red", fontSize: "12px" }}>{item}</li>
+                  ))}
               </div>
             </form>
           </div>
@@ -190,13 +196,10 @@ const Login = () => {
                     SignUp
                   </span>
                 </p>
-                {errors && errors.map((item => 
-                  (
-                  <li style={{ color: "red", fontSize: "12px" }}>
-                    {item}
-                  </li>
-                )
-                ))}
+                {errors &&
+                  errors.map((item) => (
+                    <li style={{ color: "red", fontSize: "12px" }}>{item}</li>
+                  ))}
               </div>
             </form>
           </div>

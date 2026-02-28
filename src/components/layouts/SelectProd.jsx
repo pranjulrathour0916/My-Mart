@@ -51,29 +51,29 @@ const SelectProd = () => {
         <div className="flex flex-row ">
           <div className="  w-2/12 h-2/3 p-2 flex flex-col gap-2 items-center justify-center">
             <img
-              src={filteredProds.image}
+              src={filteredProds.img}
               className="w-full p-1 object-contain border bg-white border-black h-16 "
               alt=""
             />
             <img
-              src={filteredProds.image}
+              src={filteredProds.img}
               className="w-full p-1 object-contain border bg-white border-black h-16 "
               alt=""
             />
             <img
-              src={filteredProds.image}
+              src={filteredProds.img}
               className="w-full object-contain p-1 border bg-white border-black h-16 "
               alt=""
             />
             <img
-              src={filteredProds.image}
+              src={filteredProds.img}
               className="w-full object-contain p-1 border bg-white border-black h-16 "
               alt=""
             />
           </div>
           <div className="mt-2  perspective-[4000px] h-[450px] ">
             <img
-              src={filteredProds.image}
+              src={filteredProds.img}
               className="w-full h-80  mt-10 object-contain"
               alt=""
             />
@@ -97,7 +97,7 @@ const SelectProd = () => {
         <div className="mx-2 p-2">
           <ul className="space-y-2">
             <li>
-              <p className="font-bold text-xl">{filteredProds.title}</p>
+              <p className="font-bold text-xl">{filteredProds.p_name}</p>
             </li>
             <li className="font-medium">
               {filteredProds.description}

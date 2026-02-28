@@ -10,6 +10,7 @@ import Proddetail from './components/layouts/Proddetail';
 import SelectProd from './components/layouts/SelectProd';
 import Cart from '../src/components/layouts/resuable/Cart'
 import Multiprodimg from './components/layouts/resuable/Multiprodimg';
+import {useState} from 'react'
 
 // import Snowfall from 'react-snowfall';
 
@@ -17,7 +18,7 @@ import Multiprodimg from './components/layouts/resuable/Multiprodimg';
 function App() {
   const hideNavbarRoutes = ['/login', '/signUp']
   const location = useLocation()
- 
+  const [categoryId, setCategoryId] = useState(null)
 
   const hideNavbar = hideNavbarRoutes.includes(location.pathname)
   return (
@@ -26,13 +27,13 @@ function App() {
    <div>
     {!hideNavbar && <Navbar/>}
     <div className=''>
-   {!hideNavbar && <Categories/>}
+   {!hideNavbar && <Categories setCategoryId={setCategoryId}/>}
 
     <Routes>
-      <Route path='/' element={<Home/>}/>
+      <Route path='/' element={<Home categoryId={categoryId}/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/signUp' element={<SignUp/>}/>
-      <Route path='/prodetail/:category' element={<Proddetail/>}/>
+      <Route path='/prodetail' element={<Proddetail/>}/>
       <Route path='/selectprod/:id' element={<SelectProd/>}/>
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/multi' element={<Multiprodimg/>}/>

@@ -1,10 +1,10 @@
 import {
   faAngleDown,
   faIndianRupee,
-  faStar,
+  // faStar, 
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  useNavigate, useParams } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import { useProducts } from "./query/productsQuery.ts";
 import Dropdown from "./resuable/Dropdown";
 import { useMemo, useReducer, useState } from "react";
@@ -27,16 +27,18 @@ const filterReducer = (state, action) => {
 };
 
 const Proddetail = () => {
-  const { category } = useParams();
+  const location = useLocation()
+  const category = location.state;
+  console.log("this is categoryid", category)
 
   // TanStack Query
-  const { data = [], isPending, error } = useProducts();
+  const { data = [], isPending, error } = useProducts(category);
   const maxPrice = 1000
   const [max, setmax] = useState(maxPrice);
 
   const navigate = useNavigate();
 
-  const filtering = data.filter((item) => item.category === category);
+
 
   //Reducer
   const [fitpro, setFitprod] = useReducer(filterReducer, { rating: null });
@@ -46,13 +48,13 @@ const Proddetail = () => {
 
   // Rating Filter
   const filterproducts = useMemo(() => {
-    return filtering.filter((item) => {
+    return data.filter((item) => {
 
     // Rating filter
-    if (fitpro.rating && Math.floor(item.rating.rate) !== fitpro.rating) {
-      console.log("price filter",item.price, max)
-      return false;
-    }
+    // if (fitpro.rating && Math.floor(item.rating.rate) !== fitpro.rating) {
+    //   console.log("price filter",item.price, max)
+    //   return false;
+    // }
 
     // Price filter
     if (Number(item.price) > Number(max)) {
@@ -61,7 +63,7 @@ const Proddetail = () => {
     
     return true;
   });
-  }, [filtering, fitpro.rating, max]);
+  }, [data, max]);
 
   
 
@@ -167,14 +169,14 @@ const Proddetail = () => {
             <ul className="grid  grid-cols-4 bg-slate-100  gap-4 mx-5">
               {filterproducts.map((item) => (
                 <li
-                  onClick={() => handlClick(item.id)}
+                  onClick={() => handlClick(item.p_id)}
                   className="border shadow-[0_0px_20px_rgba(0,0,0,0.5)]  p-2 hover:shadow-xl flex flex-col text-black "
-                  key={item.id}
+                  key={item.p_id}
                 >
-                  <p className="font-semibold">{item.title} </p>
+                  <p className="font-semibold">{item.p_name} </p>
                   <div className="flex justify-center p-2">
                     <img
-                      src={item.image}
+                      src={item.img}
                       className="w-full object-contain h-36 bg-slate-400 p-2 rounded-md "
                       alt=""
                     />
@@ -182,9 +184,9 @@ const Proddetail = () => {
                   <div className="text-left">
                     <div className="space-y-1 mx-2">
                       <p className="font-medium line-clamp-2">
-                        {item.description}
+                        {item.descrip}
                       </p>
-                      <p className="">
+                      {/* <p className="">
                         <span className="text-lg">{item.rating.count}</span>
                         <span className="font-medium text-xs">
                           {" "}
@@ -202,7 +204,7 @@ const Proddetail = () => {
                             />
                           )
                         )}
-                      </div>
+                      </div> */}
                       <p>
                         <span className="text-2xl font-bold">
                           <FontAwesomeIcon

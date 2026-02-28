@@ -3,11 +3,11 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useProducts } from "./query/productsQuery.ts";
 
-const Products = () => {
+const Products = ({categoryId}) => {
   const navigate = useNavigate();
 
 
-  const {data, isPending, error } = useProducts()
+  const {data, isPending, error } = useProducts(categoryId)
   const products = data ?? []
 
   const chunkedItems = useMemo(
@@ -45,17 +45,17 @@ const Products = () => {
               {chunk.map((item) => (
                 <li
                   key={item.id}
-                  onClick={() => handleClick(item.id)}
+                  onClick={() => handleClick(item.p_id)}
                   className="  p-2 transform-style-preserve-3d  rounded-xl   hover:scale-105 "
                 >
                  
                   <img
-                    src={item.image}
+                    src={item.img}
                     alt=""
                     className="w-60 h-32 rounded-lg   "
                   />
                   <p className="text-center text-xs line-clamp-2 font-semibold mt-4">
-                    {item.title}
+                    {item.descrip}
                   </p>
                  
                 </li>

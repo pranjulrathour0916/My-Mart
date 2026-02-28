@@ -7,8 +7,8 @@ import { useRef } from "react";
 import { useProducts } from "./query/productsQuery.ts";
 
 
-const Slider = () => {
-  const {data, isPending, error} = useProducts()
+const Slider = ({categoryId}) => {
+  const {data, isPending, error} = useProducts(categoryId)
   const slideRef = useRef(null);
   if(isPending)
     return console.log("pendig")
@@ -39,8 +39,8 @@ const Slider = () => {
         <ul ref={slideRef}  className="flex flex-row overflow-x-auto gap-32">
           {data.map((item) => (
             <img
-              src={item.image}
-              key={item.id}
+              src={item.img}
+              key={item.p_id}
               className="w-full h-36 py-3 object-contain snap-start hover:scale-110"
               alt=""
             />
