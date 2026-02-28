@@ -2,7 +2,9 @@ import { easeInOut, motion } from "framer-motion";
 import { useState } from "react";
 import { useUserlogin, useUserSign } from "../layouts/query/authentication.ts";
 import { loginSchema, signUPSchema } from "../validators/authScehma.ts";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
+import {  useNavigate } from "react-router-dom";
+
 
 //SignUp for structure
 const Login = () => {
@@ -24,6 +26,7 @@ const Login = () => {
   const [loginformData, setLoginFormData] = useState(loginInitialForm);
   const [errors, setErrors] = useState();
   const notify = (msg) => toast.success(msg);
+  const navigate = useNavigate()
 
   //Importing React query for SignUP fucntion
   const { mutate } = useUserSign();
@@ -55,8 +58,19 @@ const Login = () => {
       setErrors(messages);
       return;
     }
+   mutate(formData,{
+    onSuccess : (data)=>{
+         notify(data.message)
+    setTimeout(() => {
+      setLoginFormData(loginInitialForm)
+      setFormData(initialForm)
+      setFlip((prev) => !prev);
 
-    mutate(formData);
+    }, 1000);
+    }
+   });
+ 
+   
   };
   const handleLoginSumbit = () => {
     console.log(loginformData);
@@ -69,18 +83,27 @@ const Login = () => {
     }
     login(loginformData, {
       onSuccess: (data) => {
-        notify(data.message)
+        notify(data.message);
         console.log("this is response", data);
+        setTimeout(()=>{
+          navigate('/')
+        },1500)
+        
       },
+      onError : (error) => {
+        setErrors([error.message])
+      }
     });
   };
   const handleFlip = () => {
     setFlip((prev) => !prev);
     setFormData(initialForm);
+    setErrors('')
+    setLoginFormData(loginInitialForm)
   };
   return (
     <div className="">
-        <Toaster/>
+      <Toaster />
       <div className="outer [perspective:1000px] relative">
         <motion.div
           animate={{ rotateY: flip ? 0 : 180 }}

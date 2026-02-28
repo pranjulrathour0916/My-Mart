@@ -80,6 +80,7 @@ const Proddetail = () => {
 
   // Nvaigate to next page
   const handlClick = (id) => {
+    console.log("proddetail", id)
     navigate(`/selectprod/${id}`);
   };
 

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 
 export interface signUpUser  {
@@ -23,10 +23,16 @@ export const checkLogin = async(user : signUpUser) =>{
 }
 
 export const login = async(user : loginUser) => {
-    
-        console.log("this login work", user)
+       try {
+         console.log("this login work", user)
         const {data} = await axios.post("http://localhost:5001/login", user)
-        console.log(data.message)
+        console.log("this is data",data.message)
         return data;
+       } catch (err) {
+    const axiosError = err as AxiosError<any>;
+    throw new Error(
+      axiosError.response?.data?.message || "Login failed"
+    );
+  }
     
 }

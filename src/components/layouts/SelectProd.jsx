@@ -4,14 +4,14 @@ import {
   faIndianRupee,
   faLocation,
   faShoppingCart,
-  faStar,
+  // faStar,
   faTicketSimple,
   faHeart
 } from "@fortawesome/free-solid-svg-icons";
 
 import {  useState } from "react";
 import {  useParams } from "react-router-dom";
-import { useProducts } from "./query/productsQuery.ts";
+import { useGetProduct } from "./query/productsQuery.ts";
 import { addItem } from "../../redux/cartSlice.js";
 import { useDispatch } from "react-redux";
 
@@ -23,9 +23,8 @@ const SelectProd = () => {
   const dispatch = useDispatch()
 
 
-  const {data = [], isPending, error} = useProducts()
-
-  const filteredProds = data.find((item)=> item.id === Number(id))
+  const {data = [], isPending, error} = useGetProduct(id)
+  console.log("data[0]", data)
 
   
   const handleShow = () => {
@@ -51,30 +50,30 @@ const SelectProd = () => {
         <div className="flex flex-row ">
           <div className="  w-2/12 h-2/3 p-2 flex flex-col gap-2 items-center justify-center">
             <img
-              src={filteredProds.img}
+              src={data[0].img}
               className="w-full p-1 object-contain border bg-white border-black h-16 "
               alt=""
             />
             <img
-              src={filteredProds.img}
+              src={data[0].img}
               className="w-full p-1 object-contain border bg-white border-black h-16 "
               alt=""
             />
             <img
-              src={filteredProds.img}
+              src={data[0].img}
               className="w-full object-contain p-1 border bg-white border-black h-16 "
               alt=""
             />
             <img
-              src={filteredProds.img}
+              src={data[0].img}
               className="w-full object-contain p-1 border bg-white border-black h-16 "
               alt=""
             />
           </div>
           <div className="mt-2  perspective-[4000px] h-[450px] ">
             <img
-              src={filteredProds.img}
-              className="w-full h-80  mt-10 object-contain"
+              src={data[0].img}
+              className="w-full h-80 mx-10 mt-10 object-contain"
               alt=""
             />
           </div>
@@ -87,25 +86,25 @@ const SelectProd = () => {
             <FontAwesomeIcon icon={faBoltLightning} className="text-lg" /> Buy
             Now
           </button>
-          <button onClick={()=>(handleCart(filteredProds))} className=" w-full bg-orange-500 font-semibold  p-4 ">
+          <button onClick={()=>(handleCart(data[0]))} className=" w-full bg-orange-500 font-semibold  p-4 ">
             <FontAwesomeIcon icon={faShoppingCart} className="text-lg" /> Add to
             Cart
           </button>
         </div>
       </div>
-      <div className="details w-3/5 mt-2  mx-1 border-black">
+      <div className="details w-3/5 mt-2  mx-10 border-black">
         <div className="mx-2 p-2">
           <ul className="space-y-2">
             <li>
-              <p className="font-bold text-xl">{filteredProds.p_name}</p>
+              <p className="font-bold text-xl">{data[0].title}</p>
             </li>
             <li className="font-medium">
-              {filteredProds.description}
+              {data[0].descrip}
             </li>
             <li className="text-green-500 font-semibold text-sm">Special Price</li>
             <li>
               <FontAwesomeIcon icon={faIndianRupee} />
-              {filteredProds.price}{" "}
+              {data[0].price}{" "}
               <span className="text-sm line-through">
                 <FontAwesomeIcon
                   className="line-through"
@@ -116,12 +115,12 @@ const SelectProd = () => {
               <span className="text-green-600 font-bold">67% off </span>
             </li>
             <li>
-             <div className="flex flex-row items-center gap-2">
+             {/* <div className="flex flex-row items-center gap-2">
                <p className="bg-green-600 text-white rounded-xl px-4 font-bold text-sm p-1">
                 {filteredProds.rating.rate}
                 <span className="ml-1"><FontAwesomeIcon icon={faStar} className="text-xs" /></span>
               </p>
-             </div>
+             </div> */}
               <span className="ml-3 mt-1 text-slate-500 font-semibold">
                 1,05,598 ratings and 2,939 reviews
               </span>
