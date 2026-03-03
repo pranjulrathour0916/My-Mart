@@ -11,16 +11,18 @@ import {
 
 import {  useState } from "react";
 import {  useParams } from "react-router-dom";
-import { useGetProduct } from "./query/productsQuery.ts";
-import { addItem } from "../../redux/cartSlice.js";
-import { useDispatch } from "react-redux";
+import { useAdditem, useGetProduct } from "./query/productsQuery.ts";
+// import { addItem } from "../../redux/cartSlice.js";
+// import { useDispatch } from "react-redux";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const SelectProd = () => {
   const [show, setShow] = useState(false);
   const [fav, setfav] = useState(false)
   const {id} = useParams()
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
+  const {mutate} = useAdditem()
 
 
   const {data = [], isPending, error} = useGetProduct(id)
@@ -34,10 +36,25 @@ const SelectProd = () => {
     setfav(!fav)
   }
 
-  
-  const handleCart = (filteredProds) => {
+  const item = {
+    prodId : "",
+    quantity : 1
+  }
+
+  const notify = ()=>toast.success("Item added to Cart")
+  const handleCart = (id) => {
     // navigate('/cart')
-    dispatch(addItem(filteredProds))
+    // dispatch(addItem(filteredProds))
+    item.prodId = id
+    console.log("this is item", item)
+    mutate(item, {
+      onSuccess : (data) => {
+        notify();
+        console.log("this is success data ",data)
+      }
+    })
+    
+    
   }
   if(isPending)
     return <p>Loading...</p>
@@ -46,6 +63,7 @@ const SelectProd = () => {
     return <p>{error.message}</p>
   return (
     <div className="mx-10 min-h-screen mt-1 flex flex-row gap-1">
+  
       <div className="w-2/5 self-start">
         <div className="flex flex-row ">
           <div className="  w-2/12 h-2/3 p-2 flex flex-col gap-2 items-center justify-center">
@@ -81,12 +99,13 @@ const SelectProd = () => {
             <FontAwesomeIcon onClick={handleFav} icon={faHeart} className={`absolute left-[530px] top-[150px] border p-2 rounded-full bg-gray-200 text-xl ${fav ? "text-red-500" : "text-white" }`}/>
           </div>
         </div>
+        <Toaster/>
         <div className="btn flex flex-row gap-2 text-white mt-2 justify-between ml-4 items-center ">
           <button className=" w-full bg-orange-500 font-semibold  p-4 ">
             <FontAwesomeIcon icon={faBoltLightning} className="text-lg" /> Buy
             Now
           </button>
-          <button onClick={()=>(handleCart(data[0]))} className=" w-full bg-orange-500 font-semibold  p-4 ">
+          <button onClick={() => handleCart(data[0].p_id)} className=" w-full bg-orange-500 font-semibold  p-4 ">
             <FontAwesomeIcon icon={faShoppingCart} className="text-lg" /> Add to
             Cart
           </button>

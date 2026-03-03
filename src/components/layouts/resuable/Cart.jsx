@@ -1,19 +1,63 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIndianRupee, faPlus, faSubtract } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux'
-import {addItem, removeItem } from '../../../redux/cartSlice'
+// import { removeItem } from '../../../redux/cartSlice'
+import { useAdditem, useCartItem } from '../query/productsQuery.ts'
 
 
 
 const Cart = () => {
+  const item = {
+    prodId : "",
+    quantity : 1
+  }
+  const decItem = {
+    prodId : "",
+    quantity : -1
+  }
+  const {data, isPending, isSuccess } = useCartItem()
+  const {mutate} = useAdditem()
   const carItems = useSelector((state)=> state.cart)
-  const count = carItems.reduce((sum, item)=>  sum + item.quantity,0)
-  const totalPrice = carItems.reduce((sum, item)=> sum + item.quantity * item.price,0)
+  const count = data.reduce((acc, it)=>{
+    return acc + Number(it.prod_quantity)
+  },0)
+  const totalPrice = data.reduce((sum, item)=> sum + item.prod_quantity * item.prod_price,0)
   const discount = 40;
   const platformfee = 7
   const coupoun = 4 
   const totalamount = totalPrice - discount - coupoun + platformfee 
   const dispatch = useDispatch()
+
+  if(isPending)
+    return <p>Loading..</p>
+
+  if(isSuccess)
+    console.log("this is",data)
+
+  const addQuantity =(id) =>{
+    item.prodId = id
+    console.log("this is item", item)
+    mutate(item, {
+      onSuccess : (data) => {
+        // notify();
+        
+        console.log("this is success data ",data)
+      }
+    })
+  }
+
+  const subQuantity = (id)=>{
+    decItem.prodId = id
+     console.log("this is item ", decItem)
+  mutate(decItem, {
+      onSuccess : (data) => {
+        // notify();
+        console.log("this is success data ",data)
+      }
+    })
+  }
+ 
+
   
   return (
     <div>
@@ -23,30 +67,30 @@ const Cart = () => {
         <p>Saved Address</p>
         <button className='border border-black text-xs p-2 text-blue-500 font-semibold'>Enter Delivery Pincode</button>
       </div>
-      {carItems.map((item, index)=>(
+      {data.map((item, index)=>(
           <div key={index} className="cart bg-white py-2 ">
        <div className=''>
         <div className='flex border shadow-sm shadow-black flex-row 2 p-2 gap-5 mx-6 mt-2'>
         <div className="image  p-2">
-        <img src={item.image} className='w-20 h-20' alt="" />
+        <img src={item.prod_img} className='w-20 h-20' alt="" />
        </div>
        <div className="desc w-full space-y-1">
        <div className='text-sm font-semibold flex  justify-between'>
-         <p className=''>{item.title}</p>
+         <p className=''>{item.prod_title}</p>
         <p className='text-gray-500'> Delivered by Mon Dec 2</p>
        </div>
         <p className='text-slate-500 text-sm'>Size 10, White 10</p>
         <p>Seller : BRUTONFOOTWEAR</p>
        <div className="price flex items-center gap-3 py-4">
         <p className='text-xs line-through'><FontAwesomeIcon icon={faIndianRupee}/> 2499</p>
-        <span ><FontAwesomeIcon icon={faIndianRupee}/><span className='text-xl'>{item.price}</span></span>
+        <span ><FontAwesomeIcon icon={faIndianRupee}/><span className='text-xl'>{item.prod_price * item.prod_quantity}</span></span>
         <span className='text-green-600 text-xs'>82 % Off</span>
        </div>
        <div className='flex gap-10'>
         <div className='flex gap-4'>
-          <FontAwesomeIcon className='border p-1 rounded-full' onClick={()=> dispatch(removeItem(item))} icon={faSubtract}/>
-          <span className='border px-6'>{item.quantity}</span>
-          <FontAwesomeIcon className='border p-1 text-sm rounded-full' onClick={()=>dispatch(addItem(item))} icon={faPlus}/>
+          <FontAwesomeIcon className='border p-1 rounded-full' onClick={()=> subQuantity(item.prod_id)} icon={faSubtract}/>
+          <span className='border px-6'>{item.prod_quantity}</span>
+          <FontAwesomeIcon className='border p-1 text-sm rounded-full' onClick={()=>addQuantity(item.prod_id)} icon={faPlus}/>
         </div>
         <span>SAVE FOR LATER</span>
         <span>REMOVE</span>

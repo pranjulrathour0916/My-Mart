@@ -11,6 +11,7 @@ import SelectProd from './components/layouts/SelectProd';
 import Cart from '../src/components/layouts/resuable/Cart'
 import Multiprodimg from './components/layouts/resuable/Multiprodimg';
 import {useState} from 'react'
+import ProtectedRoute from './components/layouts/ProtectedRoute.tsx';
 
 // import Snowfall from 'react-snowfall';
 
@@ -35,7 +36,9 @@ function App() {
       <Route path='/signUp' element={<SignUp/>}/>
       <Route path='/prodetail' element={<Proddetail/>}/>
       <Route path='/selectprod/:id' element={<SelectProd/>}/>
+      <Route element={<ProtectedRoute/>}>
       <Route path='/cart' element={<Cart/>}/>
+      </Route>
       <Route path='/multi' element={<Multiprodimg/>}/>
     </Routes>
 </div>

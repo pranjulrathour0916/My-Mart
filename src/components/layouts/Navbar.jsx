@@ -8,6 +8,8 @@ import logo from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import { useMeLogin } from "./query/authentication.ts";
+
 
 //   const [show, setShow] = useState(true)
 // const navType = useSelector((state)=> state.navdisp.value)
@@ -31,7 +33,14 @@ import { useSelector } from "react-redux";
 const Navbar = () => {
   const navigate = useNavigate()
   const cart = useSelector((state)=> state.cart)
-  const userName = "SignIn";
+
+ 
+ const {data: user, isLoading} = useMeLogin()
+
+ const userName = user?.cust_name || "SignIn";
+  if(isLoading)
+  <p>checking..</p>
+
  
 
   const cartCount = cart.reduce((sum, item)=> sum + item.quantity,0)

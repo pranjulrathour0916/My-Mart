@@ -1,3 +1,4 @@
+
 import axios, { AxiosError } from "axios";
 
 
@@ -25,7 +26,9 @@ export const checkLogin = async(user : signUpUser) =>{
 export const login = async(user : loginUser) => {
        try {
          console.log("this login work", user)
-        const {data} = await axios.post("http://localhost:5001/login", user)
+        const {data} = await axios.post("http://localhost:5001/login", user,{
+            withCredentials : true
+        })
         console.log("this is data",data.message)
         return data;
        } catch (err) {
@@ -35,4 +38,23 @@ export const login = async(user : loginUser) => {
     );
   }
     
+}
+
+export const chkLogUser = async()=>{
+    try {
+        console.log("check log user")
+        const {data} = await axios.get("http://localhost:5001/me",
+            {
+                withCredentials : true
+            }
+        )
+        console.log("me route ",data)
+        return data
+        
+    } catch (err) {
+    const axiosError = err as AxiosError<any>;
+    throw new Error(
+      axiosError.response?.data?.message || "Login failed"
+    );
+  }
 }
