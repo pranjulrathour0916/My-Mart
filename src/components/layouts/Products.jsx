@@ -25,9 +25,11 @@ const Products = ({categoryId}) => {
   if(error)
    return console.log(error)
 
-  const handleClick = (title) => {
-    console.log("this is title from product", title);
-    navigate(`/prodetail/${title}`);
+const handleClick = (categoryId) => {
+    console.log("singleprod", categoryId);
+    navigate(`/prodetail`,{
+      state : categoryId
+    });
   };
 
 
@@ -45,7 +47,7 @@ const Products = ({categoryId}) => {
               {chunk.map((item) => (
                 <li
                   key={item.id}
-                  onClick={() => handleClick(item.p_id)}
+                  onClick={() => handleClick(item.cat_id)}
                   className="  p-2 transform-style-preserve-3d  rounded-xl   hover:scale-105 "
                 >
                  

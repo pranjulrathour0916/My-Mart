@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { checkLogin, chkLogUser, login, loginUser, signUpUser } from "./loginquery.ts";
+import { checkLogin, chkLogUser, login, loginUser, logOut, signUpUser } from "./loginquery.ts";
 
 export const useUserSign = () => {
   return useMutation({
@@ -17,5 +17,11 @@ export const useMeLogin = () =>{
     queryKey : ["me"],
     queryFn : chkLogUser,
     retry : false
+  })
+}
+
+export const useLogout = () => {
+  return useMutation({
+    mutationFn : logOut
   })
 }

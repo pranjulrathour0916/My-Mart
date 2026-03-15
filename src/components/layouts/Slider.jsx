@@ -5,9 +5,11 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
 import { useProducts } from "./query/productsQuery.ts";
+import { useNavigate } from "react-router-dom";
 
 
 const Slider = ({categoryId}) => {
+  const navigate = useNavigate()
   const {data, isPending, error} = useProducts(categoryId)
   const slideRef = useRef(null);
   if(isPending)
@@ -31,7 +33,12 @@ const Slider = ({categoryId}) => {
       behavior: "smooth",
     });
   };
-
+const handleClick = (categoryId) => {
+    console.log("singleprod", categoryId);
+    navigate(`/prodetail`,{
+      state : categoryId
+    });
+  };
   return (
     <div className="mt-10 mx-5 shadow-[0_0px_10px_rgba(0,0,0,0.5)] rounded-lg bg-transparent ">
         <p className="text-xl   font-bold mx-5 py-2 uppercase">More Items to Consider</p>
@@ -41,6 +48,7 @@ const Slider = ({categoryId}) => {
             <img
               src={item.img}
               key={item.p_id}
+              onClick={() => handleClick(item.cat_id)}
               className="w-full h-36 py-3 object-contain snap-start hover:scale-110"
               alt=""
             />

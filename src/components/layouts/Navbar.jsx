@@ -6,10 +6,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
-import { useMeLogin } from "./query/authentication.ts";
-
+import { useLogout, useMeLogin } from "./query/authentication.ts";
+import { useQuery } from "@tanstack/react-query";
+import { getCartItem } from "./query/fetcproducts.ts";
 
 //   const [show, setShow] = useState(true)
 // const navType = useSelector((state)=> state.navdisp.value)
@@ -31,25 +31,34 @@ import { useMeLogin } from "./query/authentication.ts";
 
 // }, []);
 const Navbar = () => {
-  const navigate = useNavigate()
-  const cart = useSelector((state)=> state.cart)
+  const navigate = useNavigate();
+  // const cart = useSelector((state)=> state.cart)
 
+  const { data: cart } = useQuery({
+    queryKey: ["fecthcarttem"],
+    queryFn: () => getCartItem(),
+  });
+
+  const { data: user, isLoading } = useMeLogin();
+const { mutate: logoutUser } = useLogout();
+
+const handleLogout = () => {
  
- const {data: user, isLoading} = useMeLogin()
+  logoutUser(undefined,{
+    onSuccess : ()=>{
+      navigate('/login')
+    }
+  });
+};
 
- const userName = user?.cust_name || "SignIn";
-  if(isLoading)
-  <p>checking..</p>
+  const userName = user?.cust_name || "SignIn";
+  if (isLoading) <p>checking..</p>;
 
- 
-
-  const cartCount = cart.reduce((sum, item)=> sum + item.quantity,0)
-
-  
+  const cartCount = cart?.length || 0
 
   const openCart = () => {
-    navigate("/cart")
-  }
+    navigate("/cart");
+  };
 
   return (
     <nav className="bg-[#000000] z-50 top-0 left-0 sticky w-full text-white">
@@ -91,6 +100,9 @@ const Navbar = () => {
         <div onClick={openCart} className=" text-center p-1 ">
           <FontAwesomeIcon className="text-xl" icon={faBasketShopping} />
           <p className="text-sm">Cart {cartCount}</p>
+        </div>
+        <div>
+         {user && <button onClick={handleLogout} className="hover:border-white hover:outline hover:outline-2 p-1">Logout</button>}
         </div>
       </div>
     </nav>

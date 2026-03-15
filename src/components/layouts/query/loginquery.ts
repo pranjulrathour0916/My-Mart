@@ -58,3 +58,19 @@ export const chkLogUser = async()=>{
     );
   }
 }
+
+export const logOut = async()=>{
+    try {
+        console.log("logout")
+        const {data} = await axios.post("http://localhost:5001/logout",{},{
+            withCredentials : true
+        })
+        console.log("logged out", data)
+        return data;
+    } catch (err) {
+    const axiosError = err as AxiosError<any>;
+    throw new Error(
+      axiosError.response?.data?.message || "Internal Server Error"
+    );
+  }
+}
