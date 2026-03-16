@@ -16,7 +16,7 @@ export interface loginUser  {
 export const checkLogin = async(user : signUpUser) =>{
     try {
         console.log(user)
-        const {data} = await axios.post("http://localhost:5001/signUp", user)
+        const {data} = await axios.post("https://martdb-2.onrender.com/signUp", user)
         return data;
     } catch (error) {
         console.error({error : error})
@@ -26,7 +26,7 @@ export const checkLogin = async(user : signUpUser) =>{
 export const login = async(user : loginUser) => {
        try {
          console.log("this login work", user)
-        const {data} = await axios.post("http://localhost:5001/login", user,{
+        const {data} = await axios.post("https://martdb-2.onrender.com/login", user,{
             withCredentials : true
         })
         console.log("this is data",data.message)
@@ -43,7 +43,7 @@ export const login = async(user : loginUser) => {
 export const chkLogUser = async()=>{
     try {
         console.log("check log user")
-        const {data} = await axios.get("http://localhost:5001/me",
+        const {data} = await axios.get("https://martdb-2.onrender.com/me",
             {
                 withCredentials : true
             }
@@ -62,7 +62,7 @@ export const chkLogUser = async()=>{
 export const logOut = async()=>{
     try {
         console.log("logout")
-        const {data} = await axios.post("http://localhost:5001/logout",{},{
+        const {data} = await axios.post("https://martdb-2.onrender.com/logout",{},{
             withCredentials : true
         })
         console.log("logged out", data)
