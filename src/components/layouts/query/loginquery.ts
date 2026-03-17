@@ -26,6 +26,7 @@ export const checkLogin = async(user : signUpUser) =>{
 export const login = async(user : loginUser) => {
        try {
          console.log("this login work", user)
+         console.log("LOGIN URL:", "https://martdb-2.onrender.com/login");
         const {data} = await axios.post("https://martdb-2.onrender.com/login", user,{
             withCredentials : true
         })
