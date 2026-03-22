@@ -1,17 +1,18 @@
 import { Navigate, Outlet } from "react-router-dom"
 import { useMeLogin } from "./query/authentication.ts"
+import Loader from "./resuable/Loader.jsx"
 
 const ProtectedRoute = () => {
     const {data: user, isLoading, isError} = useMeLogin()
 
     if(isLoading)
-      return  <>Checking....</>
+      return  <div><Loader/></div>
 
     if (isError || !user) {
     return <Navigate to="/login" replace />;
   }
 
-  // ⭐ user exists → allow access
+
   return <Outlet />;
 }
 

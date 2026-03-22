@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useProducts } from "./query/productsQuery.ts";
 
 import { useNavigate } from "react-router-dom";
+import Loader from "./resuable/Loader.jsx";
+import Errorpage from "./resuable/Errorpage.jsx";
 
 
 const SingleProd = ({categoryId}) => {
@@ -11,9 +13,9 @@ const SingleProd = ({categoryId}) => {
   const { data, isPending, error } = useProducts(categoryId);
   const navigate = useNavigate();
 
-  if (isPending) return <p>Loading...</p>;
+  if (isPending) return <div><Loader/></div>;
 
-  if (error) return <p>{error}</p>;
+  if (error) return <div><Errorpage/></div>;
 
   const handleClick = (categoryId) => {
     console.log("singleprod", categoryId);

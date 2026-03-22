@@ -4,6 +4,7 @@ import { checkLogin, chkLogUser, login, loginUser, logOut, signUpUser } from "./
 export const useUserSign = () => {
   return useMutation({
     mutationFn: (user: signUpUser) => checkLogin(user),
+    retry : false
   });
 };
 export const useUserlogin = () => {

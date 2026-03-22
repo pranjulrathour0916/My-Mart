@@ -9,6 +9,7 @@ import { useProducts } from "./query/productsQuery.ts";
 import Dropdown from "./resuable/Dropdown";
 import { useMemo, useReducer, useState } from "react";
 import Footer from "./Footer";
+import Loader from "./resuable/Loader.jsx";
 
 const initialState = {
   rating: null,
@@ -71,7 +72,7 @@ const Proddetail = () => {
   const [openId, setOpenId] = useState();
 
   // Part of Tanstack
-  if (isPending) return <p>Loading..</p>;
+  if (isPending) return <div><Loader/></div>;
   if (error) return <p>{error.message}</p>;
 
   const handleDropDown = (id) => {
