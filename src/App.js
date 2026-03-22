@@ -8,10 +8,11 @@ import Categories from './components/layouts/Categories';
 import Home from './components/layouts/Home';
 import Proddetail from './components/layouts/Proddetail';
 import SelectProd from './components/layouts/SelectProd';
-import Cart from '../src/components/layouts/resuable/Cart'
 import Multiprodimg from './components/layouts/resuable/Multiprodimg';
-import {useState} from 'react'
+import React, {useState} from 'react'
 import ProtectedRoute from './components/layouts/ProtectedRoute.tsx';
+import Loader from './components/layouts/resuable/Loader.jsx';
+const Cart = React.lazy(() => import('../src/components/layouts/resuable/Cart'));
 
 // import Snowfall from 'react-snowfall';
 
@@ -36,6 +37,7 @@ function App() {
       <Route path='/signUp' element={<SignUp/>}/>
       <Route path='/prodetail' element={<Proddetail/>}/>
       <Route path='/selectprod/:id' element={<SelectProd/>}/>
+      <Route path='/loader' element={<Loader/>}/>
       <Route element={<ProtectedRoute/>}>
       <Route path='/cart' element={<Cart/>}/>
       </Route>

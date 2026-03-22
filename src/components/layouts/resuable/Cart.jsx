@@ -10,6 +10,7 @@ import {
   useCartItem,
   useDeleteCartItem,
 } from "../query/productsQuery.ts";
+import Loader from "./Loader.jsx";
 
 const Cart = () => {
   const item = {
@@ -38,7 +39,7 @@ const Cart = () => {
   const coupoun = 4;
   const totalamount = totalPrice - discount - coupoun + platformfee;
 
-  if (isPending) return <p>Loading..</p>;
+  if (isPending) return <div><Loader/></div>;
 
   if (isSuccess) console.log("this is", data);
 

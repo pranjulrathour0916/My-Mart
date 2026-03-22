@@ -6,16 +6,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
 import { useProducts } from "./query/productsQuery.ts";
 import { useNavigate } from "react-router-dom";
-
+import Loader from "./resuable/Loader.jsx";
+import Errorpage from "./resuable/Errorpage.jsx";
 
 const Slider = ({categoryId}) => {
   const navigate = useNavigate()
   const {data, isPending, error} = useProducts(categoryId)
   const slideRef = useRef(null);
   if(isPending)
-    return console.log("pendig")
+    return <div><Loader/></div>
   if(error)
-    return console.log(error)
+    return <div><Errorpage/></div>
 
 
   const scrollLeft = () => {

@@ -15,6 +15,8 @@ import { useAdditem, useGetProduct } from "./query/productsQuery.ts";
 // import { addItem } from "../../redux/cartSlice.js";
 // import { useDispatch } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
+import Loader from "./resuable/Loader.jsx";
+import Errorpage from "./resuable/Errorpage.jsx";
 
 
 const SelectProd = () => {
@@ -57,10 +59,10 @@ const SelectProd = () => {
     
   }
   if(isPending)
-    return <p>Loading...</p>
+    return <div><Loader/></div>
 
   if(error)
-    return <p>{error.message}</p>
+    return <div><Errorpage/></div>
   return (
     <div className="mx-10 min-h-screen mt-1 flex flex-row gap-1">
   

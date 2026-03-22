@@ -4,6 +4,7 @@ import { useUserlogin, useUserSign } from "../layouts/query/authentication.ts";
 import { loginSchema, signUPSchema } from "../validators/authScehma.ts";
 import toast, { Toaster } from "react-hot-toast";
 import {  useNavigate } from "react-router-dom";
+import Loader from "../layouts/resuable/Loader.jsx";
 
 
 //SignUp for structure
@@ -29,7 +30,7 @@ const Login = () => {
   const navigate = useNavigate()
 
   //Importing React query for SignUP fucntion
-  const { mutate } = useUserSign();
+  const { mutate, isPending } = useUserSign();
 
   //Importing React query for login fucntion
   const { mutate: login } = useUserlogin();
@@ -48,7 +49,10 @@ const Login = () => {
       [name]: value,
     }));
   };
-
+   if(isPending)
+   {
+    <Loader/>
+   }
   const handleSumbit = () => {
     console.log(formData);
     const result = signUPSchema.safeParse(formData);

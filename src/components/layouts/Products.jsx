@@ -2,6 +2,8 @@ import { useMemo } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useProducts } from "./query/productsQuery.ts";
+import Loader from "./resuable/Loader.jsx";
+import Errorpage from "./resuable/Errorpage.jsx";
 
 const Products = ({categoryId}) => {
   const navigate = useNavigate();
@@ -21,9 +23,9 @@ const Products = ({categoryId}) => {
     [data]
   );
   if(isPending)
-    return <p>Loading..</p>
+    return <div><Loader/></div>
   if(error)
-   return console.log(error)
+   return <div><Errorpage/></div>
 
 const handleClick = (categoryId) => {
     console.log("singleprod", categoryId);

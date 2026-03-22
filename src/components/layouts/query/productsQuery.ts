@@ -36,6 +36,7 @@ export const useCartItem = () => {
   return useQuery({
     queryKey: ["fecthcarttem"],
     queryFn: () => getCartItem(),
+    staleTime: 5 * 60 * 1000,
   });
 };
 

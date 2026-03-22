@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLogout, useMeLogin } from "./query/authentication.ts";
 import { useQuery } from "@tanstack/react-query";
 import { getCartItem } from "./query/fetcproducts.ts";
+import Loader from "./resuable/Loader.jsx";
 
 //   const [show, setShow] = useState(true)
 // const navType = useSelector((state)=> state.navdisp.value)
@@ -34,13 +35,14 @@ const Navbar = () => {
   const navigate = useNavigate();
   // const cart = useSelector((state)=> state.cart)
 
+  
+  const { data: user, isLoading } = useMeLogin();
+  const { mutate: logoutUser } = useLogout();
   const { data: cart } = useQuery({
     queryKey: ["fecthcarttem"],
     queryFn: () => getCartItem(),
+    enabled : !!user
   });
-
-  const { data: user, isLoading } = useMeLogin();
-const { mutate: logoutUser } = useLogout();
 
 const handleLogout = () => {
  
@@ -52,7 +54,7 @@ const handleLogout = () => {
 };
 
   const userName = user?.cust_name || "SignIn";
-  if (isLoading) <p>checking..</p>;
+  if (isLoading) <div><Loader/></div>;
 
   const cartCount = cart?.length || 0
 
