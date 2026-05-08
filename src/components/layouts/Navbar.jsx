@@ -31,11 +31,12 @@ import Loader from "./resuable/Loader.jsx";
 //   fetchCity();
 
 // }, []);
-const Navbar = () => {
+const Navbar = ({setSearch}) => {
   const navigate = useNavigate();
   // const cart = useSelector((state)=> state.cart)
 
-  
+
+ 
   const { data: user, isLoading } = useMeLogin();
   const { mutate: logoutUser } = useLogout();
   const { data: cart } = useQuery({
@@ -82,6 +83,7 @@ const handleLogout = () => {
             type="text"
             name=""
             id=""
+            onChange={(e)=>setSearch(e.target.value)}
             className="w-full relative placeholder:text-center  text-black  rounded-lg p-1"
             placeholder="Mobile"
           />

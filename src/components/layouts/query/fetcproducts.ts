@@ -16,6 +16,16 @@ export const fectProducts = async (category?: number) => {
   return productsList.data;
 };
 
+export const fetchSearchProducts = async (search_item?: string) => {
+  const res = await axios.get(
+    "http://localhost:5001/prod/search",
+    {
+      params: search_item ? { search_item } : {},
+    }
+  );
+  return res.data;
+};
+
 export const fectProductsById = async (id: any) => {
   console.log("params", id);
   const productsList = await axios.get(
