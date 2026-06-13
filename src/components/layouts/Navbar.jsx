@@ -62,6 +62,9 @@ const handleLogout = () => {
   const openCart = () => {
     navigate("/cart");
   };
+  const handleClick = () => {
+    navigate('/')
+  }
 
   return (
     <nav className="bg-[#000000] z-50 top-0 left-0 sticky w-full text-white">
@@ -69,6 +72,7 @@ const handleLogout = () => {
         <img
           src={logo}
           alt=""
+          onClick={handleClick}
           className="w-auto  object-contain h-20 rounded-full "
         />
         <div className="flex flex-row items-center hover:outline hover:outline-2 p-3">
